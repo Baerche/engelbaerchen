@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Mock": {
+            "applicationId": "placeholder", 
+            "masterKey": "placeholder"
+        }, 
+        "_default": {
+            "link": "Mock"
+        }
+    },
+    "global": {
+        "parseVersion": "1.2.7"
+    }
+}

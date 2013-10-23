@@ -1,0 +1,6 @@
+curl -X POST \
+  -H "X-Parse-Application-Id: placeholder" \
+  -H "X-Parse-REST-API-Key: placeholder" \
+  -H "Content-Type: application/json" \
+  -d '{}' \
+  https://api.parse.com/1/functions/hello
