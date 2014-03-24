@@ -3,6 +3,10 @@
 
 // Run button configuration
   "commands": {
+      "Go": "tools/go.sh",
+      "Scratch cs": "node tools/scratch_cs.js",
+      "Scratch coffee": "node tools/scratch_cs.coffee.js",
+      "Scratch": "node tools/scratch.js",
         "Node version": "node --version"
   },
 
