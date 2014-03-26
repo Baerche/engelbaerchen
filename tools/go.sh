@@ -9,4 +9,5 @@ coffee  -o public/gen -c public/scratch.coffee
 coffee  -o tools/gen -c tools/scratch.coffee
 echo $PATH
 parse deploy
-coffee tools/zombie.coffee
+#coffee tools/zombie.coffee
+tools/gen/browse.sh

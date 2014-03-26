@@ -1,0 +1,3 @@
+run:
+	tools/go.sh
+
