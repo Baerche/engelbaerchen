@@ -22,3 +22,5 @@ rm config/global.json
 ln -s $PWD/../secrets/global.json config/
 ls -l ../secrets
 
+meld ~/.config/gedit/tools tools/gedit/tools
+
