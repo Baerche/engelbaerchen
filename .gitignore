@@ -3,4 +3,5 @@ h
 */gen/
 *.log
 *~
+*.orig
 

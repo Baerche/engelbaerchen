@@ -1,0 +1,13 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=do shell new doc
+# Shortcut=<Primary>3
+# Languages=sh
+# Applicability=all
+# Output=new-document
+# Input=nothing
+# Save-files=document
+
+echo : $GEDIT_CURRENT_DOCUMENT_PATH
+chmod +x $GEDIT_CURRENT_DOCUMENT_PATH
+$GEDIT_CURRENT_DOCUMENT_PATH

@@ -1,0 +1,13 @@
+#!/bin/sh
+# [Gedit Tool]
+# Input=nothing
+# Output=output-panel
+# Name=meld gedit tools here
+# Applicability=all
+# Save-files=nothing
+
+set -eu
+
+gedit ~/.config/gedit/tools/do-shell &
+
+meld ~/.config/gedit/tools $GEDIT_CURRENT_DOCUMENT_DIR

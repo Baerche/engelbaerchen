@@ -1,0 +1,13 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=do shell
+# Shortcut=<Primary>1
+# Languages=sh
+# Applicability=all
+# Output=output-panel
+# Input=nothing
+# Save-files=document
+
+echo : $GEDIT_CURRENT_DOCUMENT_PATH
+chmod +x $GEDIT_CURRENT_DOCUMENT_PATH
+$GEDIT_CURRENT_DOCUMENT_PATH
