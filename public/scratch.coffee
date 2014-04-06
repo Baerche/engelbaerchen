@@ -1,9 +1,5 @@
-m = () ->
-    s='coffee'
-    z s
-    document.write s
+window.run = ->
+	e = document.getElementById "log"
+	e.innerHTML = "da"
+	
 
-z = (o) ->
-    console.log 'Zombie: ' + o
-
-m()

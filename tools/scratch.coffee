@@ -1,3 +1,8 @@
-#require 'tools/secrets.coffee'
+#!/usr/bin/coffee
 
-require 'tools/zombie.coffee'
+#require 'tools/secrets.coffee' #goto test
+#require 'tools/zombie.coffee'	goto test
+
+do 
+->
+

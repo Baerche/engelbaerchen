@@ -3,11 +3,11 @@
 # Name=make with autosave
 # Shortcut=<Primary>2
 # Applicability=all
-# Output=new-document
+# Output=output-panel
 # Input=nothing
-# Save-files=document
+# Save-files=all
 
-
+set -eu
 EHOME=`echo $HOME | sed "s/#/\#/"`
 DIR=$GEDIT_CURRENT_DOCUMENT_DIR
 while test "$DIR" != "/"; do

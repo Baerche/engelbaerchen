@@ -5,6 +5,9 @@ var app = express();
 var parseExpressHttpsRedirect = require('parse-express-https-redirect');
 var parseExpressCookieSession = require('parse-express-cookie-session');
 
+var fs = require( 'fs');
+var lib = require('cloud/gen/lib');
+
 // Global app configuration section
 app.set('views', 'cloud/views');  // Specify the folder to find templates
 app.set('view engine', 'ejs');    // Set the template engine
@@ -16,11 +19,35 @@ app.use(parseExpressCookieSession({ cookie: { maxAge: 3600000 } }));
 // This is an example of hooking up a request handler with a specific request
 // path and HTTP verb using the Express routing API.
 app.get('/', function(req, res) {
-  var u = Parse.User.current()
+  var u = Parse.User.current();
 	if (Parse.User.current()) {
 		u = u.fetch().then(
 			function(u) {
-				res.render('logged-in', { username: u.getUsername() } );
+				var keys = JSON.parse( fs.readFileSync( 'cloud/keys.json.js' ));
+				keys = keys.Mock;
+				keys = '"'+ keys.applicationId + '", "' + keys.javascriptKey+ '"' ;
+				
+				if (u.getUsername() == 'admin') {
+					Parse.Cloud.useMasterKey();
+			  }
+				var query = new Parse.Query(Parse.User);	
+				query.find({
+					success: function(results) {
+						results = lib.listUsers(results);
+						res.render('logged-in', { 
+							username: u.getUsername(), 
+							initkeys: keys, 
+							users: JSON.stringify(results)
+					  } );
+					},
+					error: function(error) {
+						res.render('logged-in', { 
+							username: u.getUsername(), 
+							initkeys: keys, 
+							users: JSON.stringify(error)
+					  } );
+					}
+				});							
 			},
 			function(error) {
 				//TODO so fehler zeigen?
@@ -44,7 +71,6 @@ app.post('/login', function(req, res) {
 				res.render('meldung.ejs',  
 					{ message: 
 						'So kenne ich dich garnicht? Username, Passwort ok? ;-) ' 
-						+ JSON.stringify(req.body,null,1)
 					});
 			}
 		);

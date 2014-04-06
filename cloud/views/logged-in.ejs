@@ -2,12 +2,21 @@
 <!DOCTYPE html>
 <html>
   <head>
+		<script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+		<script>
+			//app-id, jkey
+			Parse.initialize( <%- initkeys %> );
+		</script>
+  	<script src="gen/scratch.js"></script>
     <title><%= username %>@Engelbärchen</title>
   </head>
   <body>
-    <a href="logout">Tschaui</a>
+    Menu: <a href="logout">Tschaui</a><hr>
     <h1>Hello <%= username %></h1>
-   
- 
+    
+    Javascript <span id="log">fehlt noch</span>
+    <script>run()</script> 
+    
+    <pre><%= users %></pre>
   </body>
 </html>

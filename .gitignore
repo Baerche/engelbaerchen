@@ -1,4 +1,5 @@
 config/global.json
+cloud/keys.json.js
 h
 */gen/
 *.log

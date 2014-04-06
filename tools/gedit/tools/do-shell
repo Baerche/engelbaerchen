@@ -8,6 +8,7 @@
 # Input=nothing
 # Save-files=document
 
+set -eu
 echo : $GEDIT_CURRENT_DOCUMENT_PATH
 chmod +x $GEDIT_CURRENT_DOCUMENT_PATH
 $GEDIT_CURRENT_DOCUMENT_PATH
