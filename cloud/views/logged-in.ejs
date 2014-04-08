@@ -14,9 +14,15 @@
     Menu: <a href="logout">Tschaui</a><hr>
     <h1>Hello <%= username %></h1>
     
+		<form action="post_entwurf" method="post">
+			<input type="text" name="entwurf" placeholder="Entwurf" 
+				value="<%= entwurf %>"/>
+			<input type="submit" value="Speichern" />
+		</form>	
+
+		<hr><h2>Nur für den Programmierer verständlich:</h2>
     Javascript <span id="log">fehlt noch</span>
-    <script>run()</script> 
+    <script>run()</script>    
+    <pre><%= json %></pre>
     
-    <pre><%= users %></pre>
-  </body>
 </html>

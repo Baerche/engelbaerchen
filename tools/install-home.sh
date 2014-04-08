@@ -6,8 +6,9 @@ cd $(dirname $0)/..
 if false; then
 mkdir -p ../bin
 cd ../bin
+trash-put parse
 wget https://www.parse.com/downloads/cloud_code/parse
-chmod +x ../bin/parse
+chmod +x parse
 cd -
 fi
 
@@ -15,8 +16,8 @@ fi
 mkdir -p tools/gen
 cat >tools/gen/browse.sh <<SCR
 #!/bin/sh
-chromium-browser http://engelbaerchen.parseapp.com
-#firefox http://engelbaerchen.parseapp.com
+chromium-browser https://engelbaerchen.parseapp.com
+#firefox https://engelbaerchen.parseapp.com
 
 sleep 5
 parse log
