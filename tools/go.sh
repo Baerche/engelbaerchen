@@ -10,5 +10,4 @@ coffee  -o tools/gen -c tools/*.coffee
 coffee  -o cloud/gen -c cloud/*.coffee
 echo $PATH
 echo deploying; parse deploy
-#coffee tools/zombie.coffee #still codio
 tools/gen/browse.sh
