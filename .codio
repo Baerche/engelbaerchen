@@ -3,7 +3,8 @@
 
 // Run button configuration
   "commands": {
-      "Go": "tools/go.sh",
+      "Deploy and test": "tools/go.sh",
+      "Zombie only": "tools/zombie.sh",
       "Scratch": "coffee tools/scratch.coffee",
         "Node version": "node --version"
   },
