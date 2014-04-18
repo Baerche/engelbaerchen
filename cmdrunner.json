@@ -1,0 +1,13 @@
+[
+    {
+        "label": "go",
+        "cmd": "tools/go.sh",
+        "key": "ctrl-2"
+    },
+    {
+        "label": "test",
+        "cmd": "echo $PATH;pwd",
+        "key": "ctrl-3"
+    }
+
+]

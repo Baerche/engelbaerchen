@@ -2,27 +2,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-		<script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
-		<script>
-			//app-id, jkey
-			Parse.initialize( <%- initkeys %> );
-		</script>
-  	<script src="gen/scratch.js"></script>
+    <script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+    <script>
+        //app-id, jkey
+        Parse.initialize( <%- initkeys %> );
+    </script>
+    <script src="gen/scratch.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      
     <title><%= username %>@Engelbärchen</title>
+
   </head>
   <body>
-    Menu: <a href="logout">Tschaui</a><hr>
-    <h1>Hello <%= username %></h1>
-    
-		<form action="post_entwurf" method="post">
-			<input type="text" name="entwurf" placeholder="Entwurf" 
-				value="<%= entwurf %>"/>
-			<input type="submit" value="Speichern" />
-		</form>	
+    Menu: <a href="logout">Tschaui</a>
 
+    <form action="post_entwurf" method="post">
+
+        <h2>Entwurf</h2>
+
+        <textarea class="edit_plain" name="entwurf" placeholder="Entwurf" cols="32" rows="5"><%= entwurf %></textarea>
+
+        <br>
+        
+        <input type="submit" value="Speichern" />
+
+    </form>	
+
+    <h2>Bookmarks</h2>
+
+    <div class="bookmarks" contenteditable="false"><%= bookmarks %></div>
+
+
+<!--
 		<hr><h2>Nur für den Programmierer verständlich:</h2>
     Javascript <span id="log">fehlt noch</span>
     <script>run()</script>    
     <pre><%= json %></pre>
+    -->
     
 </html>

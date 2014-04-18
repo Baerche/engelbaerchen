@@ -16,7 +16,9 @@ fi
 mkdir -p tools/gen
 cat >tools/gen/browse.sh <<SCR
 #!/bin/sh
-chromium-browser https://engelbaerchen.parseapp.com
+chromium-browser --user-data-dir=$HOME/.config/Brackets/live-dev-profile https://engelbaerchen.parseapp.com
+
+#chromium-browser https://engelbaerchen.parseapp.com
 #firefox https://engelbaerchen.parseapp.com
 
 sleep 5
