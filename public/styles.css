@@ -1,19 +1,14 @@
 .bookmarks {
-    /*
-    width: 100%;
-    height: 10em;
-    overflow:scroll;
-    */
-    color: #d2efef;
-    background-color: #33587e;
     border-width: 1%;
     border-style: dashed;
 }
-.edit_plain {
-    /*
-    width: 100%;
-    height: 10em;
-    */
-    overflow:scroll;
-    
+
+.bookmarks a:link {
 }
+.bookmarks a:visited {
+}
+
+.edit_plain {
+    width: 100%;
+}
+

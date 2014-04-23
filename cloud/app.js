@@ -10,6 +10,10 @@ var keys = JSON.parse(fs.readFileSync('cloud/keys.json.js'));
 keys = keys.Mock;
 var initkeys = '"' + keys.applicationId + '", "' + keys.javascriptKey + '"';
 
+// bookmarklet gebaut mit 
+// bearmarklet-url: 
+var bearmarklet = "javascript:(function()%7Bfunction%20callback()%7B%2F**%2F%7Dvar%20s%3Ddocument.createElement(%22script%22)%3Bs.src%3D%22%2F%2Fengelbaerchen.parseapp.com%2Fgen%2Fbearmarklet.js%22%3Bif(s.addEventListener)%7Bs.addEventListener(%22load%22%2Ccallback%2Cfalse)%7Delse%20if(s.readyState)%7Bs.onreadystatechange%3Dcallback%7Ddocument.body.appendChild(s)%3B%7D)()";
+
 // Global app configuration section
 app.set('views', 'cloud/views'); // Specify the folder to find templates
 app.set('view engine', 'ejs'); // Set the template engine
@@ -21,8 +25,7 @@ app.use(parseExpressCookieSession({
         maxAge: 3600000
     }
 }));
-// This is an example of hooking up a request handler with a specific request
-// path and HTTP verb using the Express routing API.
+
 app.get('/', function (req, res) {
     var u = Parse.User.current();
     if (Parse.User.current()) {
@@ -33,16 +36,40 @@ app.get('/', function (req, res) {
                     initkeys: initkeys,
                     json: JSON.stringify(["nix"], null, 1),
                     entwurf: u.get('entwurf'),
-                    bookmarks: u.get('bookmarks')
+                    bookmarks: u.get('bookmarks'),
+                    bearmarklet: bearmarklet
                 });
                 return true;
             }, function (error) {
+                console.error(error);
                 res.render('meldung.ejs', {
-                    message: 'Hier drin ging was kaputt. ' + JSON.stringify(error, null, 1)
+                    message: 'Hier drin ging was kaputt.'
                 });
             });
     } else {
         res.redirect('/login.html');
+    }
+});
+
+app.get('/add_bearmark', function (req, res) {
+    var u = Parse.User.current();
+    if (Parse.User.current()) {
+        u.fetch()
+            .then(function (u) {
+                lib.addBearmark(u, req.query);
+                return u.save();
+            }).then(function () {
+                res.redirect('/');
+            }, function (error) {
+                console.error(error);
+                res.render('meldung.ejs', {
+                    message: 'Hier drin ging was kaputt.'
+                });
+            });
+    } else {
+        res.render('meldung.ejs', {
+            message: 'Du bist nicht eingeloggt.'
+        });
     }
 });
 

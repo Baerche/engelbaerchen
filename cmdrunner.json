@@ -2,7 +2,7 @@
     {
         "label": "go",
         "cmd": "tools/go.sh",
-        "key": "ctrl-2"
+        "key": "ctrl-1"
     },
     {
         "label": "test",
