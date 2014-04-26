@@ -5,6 +5,11 @@
         "key": "ctrl-1"
     },
     {
+        "label": "local",
+        "cmd": "coffee public/*.coffee -o public/gen && chromium-browser --user-data-dir=$HOME/.config/Brackets/live-dev-profile a-scratch/index.html",
+        "key": "ctrl-2"
+    },
+    {
         "label": "test",
         "cmd": "echo $PATH;pwd",
         "key": "ctrl-3"

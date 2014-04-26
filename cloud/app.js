@@ -4,6 +4,8 @@ var app = express();
 var parseExpressHttpsRedirect = require('parse-express-https-redirect');
 var parseExpressCookieSession = require('parse-express-cookie-session');
 var fs = require('fs');
+var _ = require('underscore');
+
 var lib = require('cloud/gen/lib');
 
 var keys = JSON.parse(fs.readFileSync('cloud/keys.json.js'));
@@ -34,10 +36,11 @@ app.get('/', function (req, res) {
                 res.render('logged-in.ejs', {
                     username: u.getUsername(),
                     initkeys: initkeys,
-                    json: JSON.stringify(["nix"], null, 1),
+                    json: JSON.stringify("", null, 1),
                     entwurf: u.get('entwurf'),
                     bookmarks: u.get('bookmarks'),
-                    bearmarklet: bearmarklet
+                    bearmarklet: bearmarklet,
+                    msg: req.query.msg ? req.query.msg : ""
                 });
                 return true;
             }, function (error) {
@@ -105,13 +108,18 @@ app.post('/login', function (req, res) {
 app.post('/post_entwurf', function (req, res) {
     var u = Parse.User.current();
     if (Parse.User.current()) {
+    		var msg ="Gespeichert";
         u = u.fetch()
             .then(function (u) {
                 u.set('entwurf', req.body.entwurf);
+                if (req.body.Eintragen) {
+                    lib.addToBookmarks(u, _.escape(req.body.entwurf) + '<br>');
+                    msg += " und eingetragen";
+                }
                 return u.save();
             })
             .then(function () {
-                res.redirect('/');
+                res.redirect('/?msg=' + encodeURIComponent(msg));
                 return true;
             }, function (u, error) {
                 res.render('meldung.ejs', {

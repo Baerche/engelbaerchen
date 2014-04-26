@@ -11,6 +11,10 @@ exports.addBearmark = (user, query) ->
     u = """<a href="#{u}">[#{_.escape query.title} | #{u}]</a><br>\n"""
     b = u + b
     user.set 'bookmarks', b
+   
+exports.addToBookmarks = (user, rawtext) ->
+    b = user.get 'bookmarks'
+    b = rawtext + b
+    user.set 'bookmarks', b
     
     
-        

@@ -10,20 +10,29 @@
 </head>
 
 <body>
+    <!-- --
+    <div>
+        <h2>Nur für den Programmierer verständlich:</h2>
+        <pre>
+            <%=json %>
+        </pre>
+        <hr>
+    </div>
+    <!-- -->
+
     Menu:
     <a href="logout">Tschaui</a>
 
     <form action="post_entwurf" method="post">
-
         <h2>Entwurf</h2>
-
         <textarea class="edit_plain" name="entwurf" placeholder="Entwurf" rows="5"><%=entwurf %></textarea>
-
         <br>
-
-        <input type="submit" value="Speichern" />
-
+        <input type="submit" value="Speichern" name="Speichern"/>
+        <input type="submit" value="Eintragen" name="Eintragen"/>
+        <button onclick="return loeschen()">Löschen</button>
     </form>
+    
+    <%=msg%>
 
     <h2>Bookmarks</h2>
 
@@ -34,15 +43,6 @@
     <a href="<%-bearmarklet%>">Bärmarklet</a>
     <textarea><%-bearmarklet%></textarea>
     
-    <div hidden="true">
-        <hr>
-        <h2>Nur für den Programmierer verständlich:</h2>
-        Javascript
-        <span id="log">fehlt noch</span>
-        <pre>
-            <%=json %>
-        </pre>
-    </div>
     <script src="gen/logged-in.js"></script>
 
 </html>
