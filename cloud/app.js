@@ -6,14 +6,14 @@ var parseExpressCookieSession = require('parse-express-cookie-session');
 var fs = require('fs');
 var _ = require('underscore');
 
+var config = require('cloud/gen/global').content;
 var lib = require('cloud/gen/lib');
 
-var keys = JSON.parse(fs.readFileSync('cloud/keys.json.js'));
-keys = keys.Mock;
-var initkeys = '"' + keys.applicationId + '", "' + keys.javascriptKey + '"';
+var keys = lib.appKeys();
 
-// bookmarklet gebaut mit 
+// bookmarklet gebaut mit: 
 // bearmarklet-url: 
+//javascript:(function(){function callback(){/**/}var s=document.createElement("script");s.src="//engelbaerchen.parseapp.com/gen/bearmarklet.js";if(s.addEventListener){s.addEventListener("load",callback,false)}else if(s.readyState){s.onreadystatechange=callback}document.body.appendChild(s);})()"
 var bearmarklet = "javascript:(function()%7Bfunction%20callback()%7B%2F**%2F%7Dvar%20s%3Ddocument.createElement(%22script%22)%3Bs.src%3D%22%2F%2Fengelbaerchen.parseapp.com%2Fgen%2Fbearmarklet.js%22%3Bif(s.addEventListener)%7Bs.addEventListener(%22load%22%2Ccallback%2Cfalse)%7Delse%20if(s.readyState)%7Bs.onreadystatechange%3Dcallback%7Ddocument.body.appendChild(s)%3B%7D)()";
 
 // Global app configuration section
@@ -33,10 +33,18 @@ app.get('/', function (req, res) {
     if (Parse.User.current()) {
         u.fetch()
             .then(function (u) {
+                json = null;
+                if (u.getUsername() === "admin") {
+                	try{
+						json = 'nix';
+					} catch (e) {
+						json = {error: e};
+					}
+					json = JSON.stringify(json, null, 4);
+				}
                 res.render('logged-in.ejs', {
                     username: u.getUsername(),
-                    initkeys: initkeys,
-                    json: JSON.stringify("", null, 1),
+                    json: json,
                     entwurf: u.get('entwurf'),
                     bookmarks: u.get('bookmarks'),
                     bearmarklet: bearmarklet,
@@ -108,7 +116,7 @@ app.post('/login', function (req, res) {
 app.post('/post_entwurf', function (req, res) {
     var u = Parse.User.current();
     if (Parse.User.current()) {
-    		var msg ="Gespeichert";
+        var msg ="Gespeichert";
         u = u.fetch()
             .then(function (u) {
                 u.set('entwurf', req.body.entwurf);

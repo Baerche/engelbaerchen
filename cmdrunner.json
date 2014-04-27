@@ -11,8 +11,9 @@
     },
     {
         "label": "test",
-        "cmd": "echo $PATH;pwd",
-        "key": "ctrl-3"
+        "cmd": "parse log",
+         "cmd1": "echo $PATH;pwd;",
+       "key": "ctrl-3"
     }
 
 ]

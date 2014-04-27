@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <!-- --
+    <% if (json) { %>
     <div>
         <h2>Nur für den Programmierer verständlich:</h2>
         <pre>
@@ -18,13 +18,14 @@
         </pre>
         <hr>
     </div>
-    <!-- -->
+    <% } %>
 
     Menu:
     <a href="logout">Tschaui</a>
+    | <a href="edit_bookmarks.html">Edit Bookmarks</a>
 
     <form action="post_entwurf" method="post">
-        <h2>Entwurf</h2>
+        <h2>Entwurf von <%=username %></h2>
         <textarea class="edit_plain" name="entwurf" placeholder="Entwurf" rows="5"><%=entwurf %></textarea>
         <br>
         <input type="submit" value="Speichern" name="Speichern"/>

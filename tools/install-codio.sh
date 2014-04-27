@@ -1,6 +1,7 @@
 #!/bin/sh
-#todo cloud/keys.json link
-#tools/gen/browse.sh erstellen
+#todo move secrets to parent per link, like
+#rm secrets; ln -s $PWD/../secrets .
+#todo if secrets are visitor-visible
 
 set -eu
 cd $(dirname $0)/..

@@ -6,7 +6,12 @@ h
 *~
 *.orig
 
-a-scratch/
+a-scratch/*
+!a-scratch/templates/
 
 OME/
+
+secrets/
+
+zz_build_prod/
 

@@ -1,4 +1,8 @@
 _ = require 'underscore'
+config = require('cloud/gen/global').content;
+
+# Parse.applicationId missing while deploy
+appKey = "XvfIKW98ROlBjl9RHwZYqRwnOsUbI87MTlbUNY6L" #Dev
 
 exports.listUsers = (users) ->
 	[ users.length,
@@ -17,4 +21,17 @@ exports.addToBookmarks = (user, rawtext) ->
     b = rawtext + b
     user.set 'bookmarks', b
     
-    
+appFromKey = (key,apps) ->
+	for i of apps
+		if apps[i].applicationId == key
+			return [i, apps[i]]
+	return null
+
+exports.appName = () ->
+	a = appFromKey appKey, config.applications
+	a[0]
+
+exports.appKeys = () ->
+	a = appFromKey appKey, config.applications
+	a[1]
+	

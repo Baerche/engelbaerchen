@@ -1,14 +1,14 @@
 #!/bin/sh
 # [Gedit Tool]
-# Name=do shell new doc
-# Shortcut=<Primary>4
+# Name=xterm shell
+# Shortcut=<Primary>3
 # Languages=sh
 # Applicability=all
-# Output=new-document
+# Output=output-panel
 # Input=nothing
-# Save-files=document
+# Save-files=all
 
 set -eu
 echo : $GEDIT_CURRENT_DOCUMENT_PATH
 chmod +x $GEDIT_CURRENT_DOCUMENT_PATH
-$GEDIT_CURRENT_DOCUMENT_PATH
+xterm -e $GEDIT_CURRENT_DOCUMENT_PATH &

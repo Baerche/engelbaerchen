@@ -1,11 +1,21 @@
 {
     "applications": {
-        "Mock": {
-            "applicationId": "placeholder", 
-            "masterKey": "placeholder"
+		"Dev": {
+			"masterKey": "placeholder",
+			"cookieSigningSecret": "placeholder",
+
+			"applicationId": "XvfIKW98ROlBjl9RHwZYqRwnOsUbI87MTlbUNY6L",
+			"javascriptKey": "dlDxGBVnt0qTA7kU2vNH7DOqenDpAa1R3zHI7BGT"
+		}, 
+      	"Prod": {
+         	"masterKey": "placeholder",
+ 			"cookieSigningSecret": "placeholder",
+ 			
+ 			"applicationId": "blbi1Ys4npksu5tvtfJ1L24atXBLMq4yxCuUkV0V",
+          	"javascriptKey": "vYngTqzArEfFE3m35vVJJiaaVx7nRSbOU14OYK8i"
         }, 
-        "_default": {
-            "link": "Mock"
+       "_default": {
+            "link": "Dev"
         }
     },
     "global": {

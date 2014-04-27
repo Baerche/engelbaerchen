@@ -2,13 +2,17 @@
 # [Gedit Tool]
 # Name=do shell
 # Shortcut=<Primary>1
-# Languages=sh
+# Languages=
 # Applicability=all
 # Output=output-panel
 # Input=nothing
-# Save-files=document
+# Save-files=all
 
 set -eu
-echo : $GEDIT_CURRENT_DOCUMENT_PATH
-chmod +x $GEDIT_CURRENT_DOCUMENT_PATH
-$GEDIT_CURRENT_DOCUMENT_PATH
+G=$GEDIT_CURRENT_DOCUMENT_PATH
+echo : $G
+case ${G##*.} in
+"coffee") coffee $G;;
+"sh") chmod +x $G; $G;;
+*) echo "Unbekannter script-typ" ${G##*.}: $G
+esac
