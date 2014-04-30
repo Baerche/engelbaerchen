@@ -24,10 +24,17 @@ catch e
 			applicationId: "placeholder"
 			"javascriptKey": "placeholder"
 
-ko = insertKeys 'config/in-global.json', keys
-ko = JSON.stringify ko, null, 1
+config = insertKeys 'config/in-global.json', keys
+ko = JSON.stringify config, null, 1
 fs.writeFileSync secrets + '/global.json', ko
 fs.writeFileSync secrets + '/gen/global.js', 'exports.content = ' + ko
+
+k = config.applications['Dev']
+init = """
+	Parse.initialize("#{k.applicationId}", "#{k.javascriptKey}");
+"""
+fs.writeFileSync 'public/gen/keys.js', init
+
 
 console.log """
 mkdir -p #{ secrets }

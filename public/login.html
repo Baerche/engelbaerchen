@@ -2,22 +2,34 @@
 <html>
 
 <head>
-  <title>Login@Engelbärchen</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="gen/lib.js"></script>
+	<script src="gen/login.js"></script>
+	<title>Login - Engelbärchen</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 
 <body>
-  <h1>Hier spielen Engelchen mit Bärchen.</h1>
-  <h2>Du auch? Und wer bist du?</h2>
-	<form action="/login" method="post">
-    <input type="text" name="username" placeholder="Username" />
-        <br>
-    <input type="password" name="password" placeholder="Password" />
-        <br>
-    <input type="submit" name="bekannt" value="Los!" />
-        <p>
-    <input type="submit" name="neu_hier" value="Bin neu. Merk dirs Compi :-)" />
-  </form>
+
+	<h1>Hier spielen Engelchen mit Bärchen.</h1>
+	<h2>Du auch? Und wer bist du?</h2>
+	<form action="/login" method="post" id="form">
+		<input type="text" name="username" id="username" placeholder="Username" />
+			<br>
+		<input type="password" name="password" id="password" placeholder="Password" />
+			<br>
+		<input type="submit" name="bekannt" value="Los!" onclick="return login()"/>
+			<p>
+		<input type="submit" name="neu_hier" value="Bin neu. Merk dirs Compi :-)" />
+		<input type="hidden" name="robot" id="robot" value="true">
+	</form>
+
+	<div>
+		<hr>
+		<h2>Fachchinesisch fürs Team:</h2>
+		<pre id="log"></pre>
+	</div>
+  
+	<script >main()</script>
 </body>
 
 </html>

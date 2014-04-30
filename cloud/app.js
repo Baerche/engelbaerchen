@@ -110,6 +110,7 @@ app.post('/login', function (req, res) {
     } else {
         res.render('meldung.ejs', {
             message: 'Ich geh kaputt! Hihi das kiitzelt!'
+            + JSON.stringify(req.body)
         });
     }
 });
@@ -149,6 +150,7 @@ app.get('/logout', function (req, res) {
     Parse.User.logOut();
     res.redirect('/');
 });
+
 // // Example reading from the request query string of an HTTP get request.
 // app.get('/test', function(req, res) {
 //   // GET http://example.parseapp.com/test?message=hello

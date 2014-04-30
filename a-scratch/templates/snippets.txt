@@ -1,0 +1,15 @@
+  <div>
+	  <hr>
+    <h2>Fachchinesisch fürs Team:</h2>
+    <pre id="log"></pre>
+  </div>
+  
+
+	if not lib.ajax then return true
+
+log = lib.log
+
+	<script src="gen/lib.js"></script>
+
+	<script >main()</script>
+

@@ -4,25 +4,15 @@
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>
-        <%=username %>@Engelbärchen</title>
+	<script src="gen/lib.js"></script>
+   <script src="gen/logged-in.js"></script>
+   <title><%=username %>@Engelbärchen</title>
 
 </head>
 
-<body>
-    <% if (json) { %>
-    <div>
-        <h2>Nur für den Programmierer verständlich:</h2>
-        <pre>
-            <%=json %>
-        </pre>
-        <hr>
-    </div>
-    <% } %>
-
     Menu:
-    <a href="logout">Tschaui</a>
-    | <a href="edit_bookmarks.html">Edit Bookmarks</a>
+    <a href="logout" onclick="return logout()">Tschaui</a>
+    | <a href="edit-bookmarks.html">Edit Bookmarks</a>
 
     <form action="post_entwurf" method="post">
         <h2>Entwurf von <%=username %></h2>
@@ -37,13 +27,22 @@
 
     <h2>Bookmarks</h2>
 
-    <div class="bookmarks" contenteditable="false">
+    <div class="bookmarks">
         <%-bookmarks %>
     </div>
 
     <a href="<%-bearmarklet%>">Bärmarklet</a>
     <textarea><%-bearmarklet%></textarea>
+
+<body>
+  <div>
+	<hr>
+    <h2>Fachchinesisch fürs Team:</h2>
+    <pre id="log"><%=json %>
+</pre>
+  </div>
+
     
-    <script src="gen/logged-in.js"></script>
+ 	<script >main()</script>
 
 </html>
