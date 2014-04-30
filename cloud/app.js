@@ -33,10 +33,10 @@ app.get('/', function (req, res) {
     if (Parse.User.current()) {
         u.fetch()
             .then(function (u) {
-                json = null;
+                json = 'Es wird nichts untersucht';
                 if (u.getUsername() === "admin") {
                 	try{
-						json = 'nix';
+						json = [json, 'auch nicht als admin'];
 					} catch (e) {
 						json = {error: e};
 					}
@@ -120,10 +120,12 @@ app.post('/post_entwurf', function (req, res) {
         var msg ="Gespeichert";
         u = u.fetch()
             .then(function (u) {
-                u.set('entwurf', req.body.entwurf);
                 if (req.body.Eintragen) {
                     lib.addToBookmarks(u, _.escape(req.body.entwurf) + '<br>');
                     msg += " und eingetragen";
+	                u.set('entwurf', '');
+                } else {
+	                u.set('entwurf', req.body.entwurf);
                 }
                 return u.save();
             })

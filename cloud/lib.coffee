@@ -20,7 +20,7 @@ exports.addToBookmarks = (user, rawtext) ->
     b = user.get 'bookmarks'
     b = rawtext + b
     user.set 'bookmarks', b
-    
+
 appFromKey = (key,apps) ->
 	for i of apps
 		if apps[i].applicationId == key
