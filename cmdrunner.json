@@ -6,12 +6,17 @@
     },
     {
         "label": "local",
-        "cmd": "coffee public/*.coffee -o public/gen && chromium-browser --user-data-dir=$HOME/.config/Brackets/live-dev-profile a-scratch/index.html",
+        "cmd": "make loc",
         "key": "ctrl-2"
     },
     {
+        "key": "ctrl-4",
+        "label": "shell",
+        "cmd": "a-scratch/scratch.sh"
+   },
+    {
         "label": "test",
-        "cmd": "parse log",
+        "cmd": "pwd",
          "cmd1": "echo $PATH;pwd;",
        "key": "ctrl-3"
     }

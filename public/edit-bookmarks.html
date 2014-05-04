@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="gen/lib.js"></script>
+	<script src="gen/edit-bookmarks.js"></script>
+
+  <title>Edit Bookmarks - Engelbärchen</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+  <h1>Edit Bookmarks</h1>
+    <a href=".">Start</a>
+    | <a href="logout" onclick="return logout()">Tschaui</a>
+    | <a href="login.html">Login</a>
+  	<div id="realThing">
+		<br>
+		<button id="edit" onclick="return edit()">Test</button>
+		<button onclick="return speichern()">Speichern</button>
+		<div class="bookmarks" id="bookmarks" contenteditable="true">
+		    Bookmarks noch nicht geladen, bitte warten
+		</div>
+    </div>
+
+
+
+<!--------->
+    <div>
+        <hr>
+        <h2>Nur für den Programmierer verständlich:</h2>
+        <pre id="log"></pre>
+    </div>
+
+	<script >main()</script>
+</body>
+
+</html>

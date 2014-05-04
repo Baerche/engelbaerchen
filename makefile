@@ -1,6 +1,8 @@
-go: run
+go: loc
 
-run:
+run: dev #compat
+
+dev: # upload dev
 	tools/go.sh
 
 sec: #secrets:
@@ -9,15 +11,27 @@ sec: #secrets:
 log:
 	tools/log.sh
 
-BROWSE=chromium-browser --user-data-dir=$(HOME)/.config/Brackets/live-dev-profile
-loc: #local:
-	coffee -o public/gen/ public/*.coffee 
-	$(BROWSE) http://localhost://baerchen/work/login.html
-#	chromium-browser --user-data-dir=$(HOME)/.config/Brackets/live-dev-profile http://localhost://baerchen/work/login-ajax.html &
-	#chromium-browser --user-data-dir=$(HOME)/.config/Brackets/live-dev-profile http://localhost://baerchen/work/edit-bookmarks.html &
-	#	chromium-browser --user-data-dir=$(HOME)/.config/Brackets/live-dev-profile a-scratch/index.html &
+BROWSE=chromium-browser
+
+loc: #local server
+	coffee -o public/gen/ -c public/*.coffee 
+	#$(BROWSE) http://localhost//baerchen/work/login.html
+	$(BROWSE) http://localhost//baerchen/work/public/edit-bookmarks.html &
+	#$(BROWSE) a-scratch/index.html &
 	
-prod: 
+prod: #upload prod, vorsicht
 	tools/deploy_prod.sh
 	chromium-browser --user-data-dir=$(HOME)/.config/Brackets/live-dev-profile https://engelbaerchen.parseapp.com/ &
+	
+lia: # link_apache:
+	rm ~/public/work -f
+	ln -s $$PWD ~/public/work
+	ls -l ~/public
+	
+wget:
+	mkdir -p local-libs
+	cd local-libs;\
+	wget -c http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js;\
+	wget -c http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js;\
+	wget -c http://www.parsecdn.com/js/parse-1.2.18.min.js
 	

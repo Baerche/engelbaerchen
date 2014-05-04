@@ -13,3 +13,7 @@ log = lib.log
 
 	<script >main()</script>
 
+window.main = ->
+	if lib.keinGrosserBrowser() then return true
+	$ ->
+

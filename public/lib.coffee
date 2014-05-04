@@ -11,12 +11,20 @@ window.main = ->
 
 if not window.operamini
 	lib.ajax = true
-	document.write """
-		<script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-		<script src="gen/keys.js"></script>
-	"""
+	if location.host != 'localhost'
+		document.write """
+			<script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+			<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+			<script src="gen/keys.js"></script>
+		"""
+	else
+		document.write """
+			<script src="../local-libs/parse-1.2.18.min.js"></script>
+			<script src="../local-libs/jquery.min.js"></script>
+			<script src="../local-libs/underscore-min.js"></script>
+			<script src="gen/keys.js"></script>
+		"""
 	log = (o) ->
 		console.log o
 		$ '#log'
@@ -33,4 +41,16 @@ window.logout = () ->
 	Parse.User.logOut()
 	true
 
+lib.keinGrosserBrowserDannZurueck = ->
+	if not lib.ajax
+	#if true
+		document.getElementById('realThing').innerHTML = """
+			<hr>
+			<h2><a href='.'">
+			Diese Funktion braucht einen grossen Browser.<br>
+			Zurück
+			</a></h2>
+		"""
+		return true
+	return false
 
