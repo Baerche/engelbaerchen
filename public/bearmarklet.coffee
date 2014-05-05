@@ -1,4 +1,3 @@
-s = "https://engelbaerchen.parseapp.com/add_bearmark?url=#{encodeURIComponent location.href}&title=#{encodeURIComponent document.title}"
-console.log s
-location.href=s
+location.href= "https://dev-engelbaerchen.parseapp.com/add_bearmark?url=#{encodeURIComponent location.href}&title=#{encodeURIComponent document.title}"
+
 

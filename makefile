@@ -2,7 +2,7 @@ go: dev
 
 run: dev #compat
 
-dev: # upload dev
+dev: unlnk # upload dev
 	tools/go.sh
 
 sec: #secrets:
@@ -11,7 +11,8 @@ sec: #secrets:
 log:
 	tools/log.sh
 
-BROWSE=chromium-browser
+#BROWSE=chromium-browser
+BROWSE=opera
 
 loc: #local server
 	coffee -o public/gen/ -c public/*.coffee 

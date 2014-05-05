@@ -6,12 +6,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script src="gen/lib.js"></script>
    <script src="gen/logged-in.js"></script>
-   <title><%=username %>@Engelbärchen</title>
+   <title><%=username %>@<%=pref %>Engelbärchen</title>
 
 </head>
 
-    Menu:
+    <%=pref %>Menu:
     <a href="logout" onclick="return logout()">Tschaui</a>
+    | <a href="debug.html" ">Debug</a>
 
     <form action="post_entwurf" method="post">
         <h2>Entwurf von <%=username %></h2>
@@ -31,7 +32,7 @@
     </div>
 
     <a href="<%-bearmarklet%>">Bärmarklet</a>
-    <textarea><%-bearmarklet%></textarea>
+    <textarea cols=40 rows=12><%-bearmarklet%></textarea>
 
 <body>
   <div>

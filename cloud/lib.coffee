@@ -1,22 +1,23 @@
 _ = require 'underscore'
 config = require('cloud/gen/global').content;
+lib = exports
 
 # Parse.applicationId missing while deploy
 appKey = "XvfIKW98ROlBjl9RHwZYqRwnOsUbI87MTlbUNY6L" #Dev
 
-exports.listUsers = (users) ->
+lib.listUsers = (users) ->
 	[ users.length,
 		( [u.get('username'), u.get('entwurf')] for u in users )
 	]
 	
-exports.addBearmark = (user, query) ->
+lib.addBearmark = (user, query) ->
     b = user.get 'bookmarks'
     u = _.escape query.url
     u = """<a href="#{u}">[#{_.escape query.title} | #{u}]</a><br>\n"""
     b = u + b
     user.set 'bookmarks', b
    
-exports.addToBookmarks = (user, rawtext) ->
+lib.addToBookmarks = (user, rawtext) ->
     b = user.get 'bookmarks'
     b = rawtext + b
     user.set 'bookmarks', b
@@ -27,11 +28,20 @@ appFromKey = (key,apps) ->
 			return [i, apps[i]]
 	return null
 
-exports.appName = () ->
+lib.appName = () ->
 	a = appFromKey appKey, config.applications
 	a[0]
 
-exports.appKeys = () ->
+lib.appKeys = () ->
 	a = appFromKey appKey, config.applications
 	a[1]
-	
+
+lib.bearmarklet = encodeURI """javascript:(function(){
+	var s=document.createElement("script");
+	s.src="//#{if lib.appName()=='Dev' then 'dev-' else ''}engelbaerchen.parseapp.com/gen/bearmarklet.js";
+	document.body.appendChild(s);
+	})()
+""".replace('\n',' ')
+
+lib.appPrefix = "#{if lib.appName()=='Dev' then 'Dev-' else ''}"
+

@@ -11,10 +11,15 @@ var lib = require('cloud/gen/lib');
 
 var keys = lib.appKeys();
 
+/*
+javascript:%0Avar%20s=document.createElement(%22script%22);%0As.src=%22//dev-engelbaerchen.parseapp.com/gen/bearmarklet.js%22;%0Adocument.body.appendChild(s);
 // bookmarklet gebaut mit: 
 // bearmarklet-url: 
-//javascript:(function(){function callback(){/**/}var s=document.createElement("script");s.src="//engelbaerchen.parseapp.com/gen/bearmarklet.js";if(s.addEventListener){s.addEventListener("load",callback,false)}else if(s.readyState){s.onreadystatechange=callback}document.body.appendChild(s);})()"
+//javascript:(function(){function callback(){}var s=document.createElement("script");s.src="//engelbaerchen.parseapp.com/gen/bearmarklet.js";if(s.addEventListener){s.addEventListener("load",callback,false)}else if(s.readyState){s.onreadystatechange=callback}document.body.appendChild(s);})()"
 var bearmarklet = "javascript:(function()%7Bfunction%20callback()%7B%2F**%2F%7Dvar%20s%3Ddocument.createElement(%22script%22)%3Bs.src%3D%22%2F%2Fengelbaerchen.parseapp.com%2Fgen%2Fbearmarklet.js%22%3Bif(s.addEventListener)%7Bs.addEventListener(%22load%22%2Ccallback%2Cfalse)%7Delse%20if(s.readyState)%7Bs.onreadystatechange%3Dcallback%7Ddocument.body.appendChild(s)%3B%7D)()";
+*/
+
+var bearmarklet = lib.bearmarklet
 
 // Global app configuration section
 app.set('views', 'cloud/views'); // Specify the folder to find templates
@@ -48,7 +53,8 @@ app.get('/', function (req, res) {
                     entwurf: u.get('entwurf'),
                     bookmarks: u.get('bookmarks'),
                     bearmarklet: bearmarklet,
-                    msg: req.query.msg ? req.query.msg : ""
+                    msg: req.query.msg ? req.query.msg : "",
+                    pref: lib.appPrefix
                 });
                 return true;
             }, function (error) {
