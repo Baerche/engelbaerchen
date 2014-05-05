@@ -12,7 +12,6 @@
 
     Menu:
     <a href="logout" onclick="return logout()">Tschaui</a>
-    | <a href="edit-bookmarks.html">Edit Bookmarks</a>
 
     <form action="post_entwurf" method="post">
         <h2>Entwurf von <%=username %></h2>
@@ -25,7 +24,7 @@
     
     <%=msg%>
 
-    <h2>Bookmarks</h2>
+    <h2>Bookmarks <a href="edit-bookmarks.html"><small>Edit</small></a></h2>
 
     <div class="bookmarks">
         <%-bookmarks %>

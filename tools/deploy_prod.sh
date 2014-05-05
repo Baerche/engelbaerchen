@@ -4,7 +4,7 @@ cd $(dirname $0)/..
 
 B=zz_build_prod
 
-#coffee tools/keys.coffee Prod applicationId; exit
+rm public/scratch-*
 
 DEV_APPKEY=$(coffee tools/keys.coffee Dev applicationId)
 PROD_APPKEY=$(coffee tools/keys.coffee Prod applicationId)

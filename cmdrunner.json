@@ -6,7 +6,7 @@
     },
     {
         "label": "local",
-        "cmd": "make loc",
+        "cmd": "make",
         "key": "ctrl-2"
     },
     {

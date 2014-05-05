@@ -1,4 +1,4 @@
-go: loc
+go: dev
 
 run: dev #compat
 
@@ -35,3 +35,10 @@ wget:
 	wget -c http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js;\
 	wget -c http://www.parsecdn.com/js/parse-1.2.18.min.js
 	
+lnk: unlnk
+	ln -s $$PWD/cloud/views/logged-in.ejs public/scratch-html.html
+    
+unlnk:
+	rm public/scratch-html.html -f
+
+

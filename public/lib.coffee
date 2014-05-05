@@ -17,6 +17,7 @@ if not window.operamini
 			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 			<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
 			<script src="gen/keys.js"></script>
+			<script src="lib-js.js"></script>
 		"""
 	else
 		document.write """
@@ -24,6 +25,7 @@ if not window.operamini
 			<script src="../local-libs/jquery.min.js"></script>
 			<script src="../local-libs/underscore-min.js"></script>
 			<script src="gen/keys.js"></script>
+			<script src="lib-js.js"></script>
 		"""
 	log = (o) ->
 		console.log o
@@ -42,7 +44,7 @@ window.logout = () ->
 	true
 
 lib.keinGrosserBrowserDannZurueck = ->
-	if not lib.ajax
+	if (not lib.ajax) or (not lib.isContentEditable())
 	#if true
 		document.getElementById('realThing').innerHTML = """
 			<hr>
