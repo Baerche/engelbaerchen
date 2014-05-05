@@ -1,36 +1,37 @@
 log = lib.log
+ulog = lib.ulog
 
 window.main = ->
 	if lib.keinGrosserBrowserDannZurueck() then return true
 	$ ->
 		u = Parse.User.current()
 		if u
-			log 'Eingeloggt, hole Bookmarks und so'
+			ulog 'Eingeloggt, hole Bookmarks und so'
 			u.fetch()
 			.then (u) ->
 				s = u.get 'username'
-				log 'Hallo ' + s
+				ulog 'Hallo ' + s
 				s = u.get 'bookmarks'
 				$ '#bookmarks'
 				.html s
 			, (e) -> log e
 		else
-			log 'Nicht eingeloggt'
+			ulog 'Nicht eingeloggt'
 
 window.speichern = ->
 	u = Parse.User.current()
 	if u
-		log 'Speichere'
+		ulog 'Speichere'
 		u.fetch()
 		.then (u) ->
 			s = $ '#bookmarks'
 			.html()
 			u.set 'bookmarks', s
 			u.save().then ->
-				log 'Gespeichert'
-			, (e) -> alert log 'Speichern fehlgeschlagen ' + e
+				ulog "Gespeichert #{new Date()}"
+			, (e) -> alert ulog 'Speichern fehlgeschlagen ' + e
 	else
-		alert log 'Nicht eingeloggt, kein Speichern'
+		alert ulog 'Nicht eingeloggt, kein Speichern'
 
 window.edit = ->
 	s = $ '#edit'

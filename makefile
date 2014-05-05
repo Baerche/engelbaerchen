@@ -11,8 +11,8 @@ sec: #secrets:
 log:
 	tools/log.sh
 
-#BROWSE=chromium-browser
-BROWSE=opera
+BROWSE=chromium-browser
+#BROWSE=opera
 
 loc: #local server
 	coffee -o public/gen/ -c public/*.coffee 

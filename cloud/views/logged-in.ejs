@@ -10,6 +10,7 @@
 
 </head>
 
+    <small><script>document.write(new Date().toString().match(/(.*)GMT/)[1])</script></small><br>
     <%=pref %>Menu:
     <a href="logout" onclick="return logout()">Tschaui</a>
     | <a href="debug.html" ">Debug</a>
@@ -32,7 +33,7 @@
     </div>
 
     <a href="<%-bearmarklet%>">Bärmarklet</a>
-    <textarea cols=40 rows=12><%-bearmarklet%></textarea>
+    <textarea rows="6" class="bearmarklet"><%-bearmarklet%></textarea>
 
 <body>
   <div>
