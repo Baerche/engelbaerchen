@@ -10,9 +10,10 @@
 
 </head>
 
-    <small><script>document.write(new Date().toString().match(/(.*)GMT/)[1])</script></small><br>
+    <script>writeDates()</script><br>
     <%=pref %>Menu:
     <a href="logout" onclick="return logout()">Tschaui</a>
+    | <a href="tools.html" ">Tools</a>
     | <a href="debug.html" ">Debug</a>
 
     <form action="post_entwurf" method="post">
@@ -31,9 +32,6 @@
     <div class="bookmarks">
         <%-bookmarks %>
     </div>
-
-    <a href="<%-bearmarklet%>">Bärmarklet</a>
-    <textarea rows="6" class="bearmarklet"><%-bearmarklet%></textarea>
 
 <body>
   <div>

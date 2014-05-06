@@ -52,7 +52,6 @@ app.get('/', function (req, res) {
                     json: json,
                     entwurf: u.get('entwurf'),
                     bookmarks: u.get('bookmarks'),
-                    bearmarklet: bearmarklet,
                     msg: req.query.msg ? req.query.msg : "",
                     pref: lib.appPrefix
                 });

@@ -38,7 +38,7 @@ wget:
 	
 lnk: unlnk
 	ln -s $$PWD/cloud/views/logged-in.ejs public/scratch-html.html
-    
+	
 unlnk:
 	rm public/scratch-html.html -f
 

@@ -36,12 +36,5 @@ lib.appKeys = () ->
 	a = appFromKey appKey, config.applications
 	a[1]
 
-lib.bearmarklet = encodeURI """javascript:(function(){
-	var s=document.createElement("script");
-	s.src="//#{if lib.appName()=='Dev' then 'dev-' else ''}engelbaerchen.parseapp.com/gen/bearmarklet.js";
-	document.body.appendChild(s);
-	})()
-""".replace('\n',' ')
-
 lib.appPrefix = "#{if lib.appName()=='Dev' then 'Dev-' else ''}"
 
