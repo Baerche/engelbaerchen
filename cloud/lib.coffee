@@ -19,7 +19,8 @@ lib.addBearmark = (user, query) ->
    
 lib.addToBookmarks = (user, rawtext) ->
     b = user.get 'bookmarks'
-    b = rawtext + b
+    r = rawtext.replace /\r\n/g, '. '
+    b = "{#{r}}<br>#{b}"
     user.set 'bookmarks', b
 
 appFromKey = (key,apps) ->

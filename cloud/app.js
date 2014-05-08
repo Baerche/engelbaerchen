@@ -126,7 +126,7 @@ app.post('/post_entwurf', function (req, res) {
         u = u.fetch()
             .then(function (u) {
                 if (req.body.Eintragen) {
-                    lib.addToBookmarks(u, _.escape(req.body.entwurf) + '<br>');
+                    lib.addToBookmarks(u, _.escape(req.body.entwurf));
                     msg += " und eingetragen";
 	                u.set('entwurf', '');
                 } else {
