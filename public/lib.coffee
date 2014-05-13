@@ -11,7 +11,7 @@ window.main = ->
 
 if not window.operamini
     lib.ajax = true
-    if location.host != 'localhost'
+    if not location.host.match /localhost|127\.0\.0\.1/
         document.write """
             <script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -30,12 +30,12 @@ if not window.operamini
     log = (o) ->
         console.log o
         $ '#log'
-        .append "#{if o then o.toString() else o}\n"
+        .append "#{_.escape if o then o.toString() else o}\n"
         o
     ulog = (o) ->
         log o
         $ '#ulog'
-        .text "#{if o then o.toString() else o}\n"
+        .text "#{_.escape if o then  o.toString() else o}\n"
         o
 else
     lib.ajax = false
