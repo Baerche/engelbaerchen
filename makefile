@@ -2,7 +2,7 @@ go: dev
 
 run: dev #compat
 
-dev: unlnk # upload dev
+dev: # upload dev
 	tools/go.sh
 
 sec: #secrets:
@@ -16,8 +16,13 @@ BROWSE=chromium-browser
 
 loc: #local server
 	coffee -o public/gen/ -c public/*.coffee 
+	coffee -o a-scratch/gen/ -c a-scratch/*.coffee 
+	js2coffee a-scratch/index-js.js >a-scratch/gen/index-js.coffee
+	
+	$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/a-scratch/index.html &
+	#$(BROWSE) http://localhost/baerchen/engelbaerchen/a-scratch/index.html &
 	#$(BROWSE) http://localhost//baerchen/work/login.html
-	$(BROWSE) http://localhost//baerchen/work/public/edit-bookmarks.html &
+	#$(BROWSE) http://localhost//baerchen/engelbaerchen/public/edit-bookmarks.html &
 	#$(BROWSE) a-scratch/index.html &
 	
 prod: #upload prod, vorsicht

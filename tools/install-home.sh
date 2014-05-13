@@ -16,10 +16,9 @@ fi
 mkdir -p tools/gen
 cat >tools/gen/browse.sh <<SCR
 #!/bin/sh
-chromium-browser --user-data-dir=$HOME/.config/Brackets/live-dev-profile https://dev-engelbaerchen.parseapp.com
-
-#chromium-browser https://dev-engelbaerchen.parseapp.com
+chromium-browser https://dev-engelbaerchen.parseapp.com
 #firefox https://dev-engelbaerchen.parseapp.com
+#opera  https://dev-engelbaerchen.parseapp.com
 
 #sleep 5; parse log
 

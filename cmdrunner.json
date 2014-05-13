@@ -1,13 +1,17 @@
 [
     {
-        "label": "go",
-        "cmd": "tools/go.sh",
+        "label": "make loc",
+        "cmd": "make loc",
+        "key": "ctrl-2"
+    },
+    {
+        "label": "make dev",
+        "cmd": "make dev",
         "key": "ctrl-1"
     },
     {
-        "label": "local",
-        "cmd": "make",
-        "key": "ctrl-2"
+        "label": "make",
+        "cmd": "make"
     },
     {
         "key": "ctrl-4",
