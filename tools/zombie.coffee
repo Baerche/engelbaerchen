@@ -1,8 +1,8 @@
 Browser = require 'zombie'
 assert = require 'assert'
 
-console.log u = 'https://engelbaerchen.parseapp.com/login.html'
-#console.log u = 'https://engelbaerchen.parseapp.com'
+console.log u = 'https://dev-engelbaerchen.parseapp.com/login.html'
+#console.log u = 'https://dev-engelbaerchen.parseapp.com'
 
 src = (o) -> console.log o.toString()
 descro = (o) -> console.log Object.keys(o)

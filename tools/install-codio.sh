@@ -4,12 +4,14 @@
 #todo if secrets are visitor-visible
 
 set -eu
+IFS='
+'
 cd $(dirname $0)/..
 
-#downloads
-if false; then
+downloads() {
 
 npm install -g coffee-script 
+npm install -g js2coffee 
 
 mkdir -p ../bin
 cd ../bin
@@ -17,11 +19,16 @@ rm parse
 wget https://www.parse.com/downloads/cloud_code/parse
 chmod +x ../bin/parse
 
+
+}
+
+downloads_big() {
 npm install -g zombie
+}
 
-fi
+rest() {
 
-#links
+#prep test
 mkdir -p tools/gen
 cat >tools/gen/browse.sh <<SCR
 #!/bin/sh
@@ -29,12 +36,26 @@ coffee tools/zombie.coffee
 SCR
 chmod +x tools/gen/browse.sh
 
+#links
 
-mkdir -p ../secrets
-rm config/global.json || true
-ln -s $PWD/../secrets/global.json config/
-rm cloud/keys.json.js || true
-ln -s $PWD/../secrets/keys.json cloud/keys.json.js
-ls -l ../secrets
+C="$PWD"
+rm secrets -f
+cd ..
+mkdir -p secrets/gen
+ln -s $PWD/secrets $C
+cd -
 
+rm config/global.json -f
+ln -s $PWD/secrets/gen/global.json config/
+
+rm cloud/gen/global.js -f
+ln -s $PWD/secrets/gen/global.js cloud/gen/
+
+pwd
 coffee tools/secrets.coffee
+
+}
+
+#downloads
+#downloads_big
+rest

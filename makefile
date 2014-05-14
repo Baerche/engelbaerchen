@@ -1,9 +1,13 @@
-go: dev
+go: inst-cod dev
+#go: inst-cod
 
 run: dev #compat
 
 dev: # upload dev
 	tools/go.sh
+	
+inst-cod:
+	tools/install-codio.sh
 
 sec: #secrets:
 	coffee tools/secrets.coffee
@@ -29,11 +33,6 @@ prod: #upload prod, vorsicht
 	tools/deploy_prod.sh
 	chromium-browser --user-data-dir=$(HOME)/.config/Brackets/live-dev-profile https://engelbaerchen.parseapp.com/ &
 	
-lia: # link_apache:
-	rm ~/public/work -f
-	ln -s $$PWD ~/public/work
-	ls -l ~/public
-	
 wget:
 	mkdir -p local-libs
 	cd local-libs;\
@@ -41,10 +40,5 @@ wget:
 	wget -c http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js;\
 	wget -c http://www.parsecdn.com/js/parse-1.2.18.min.js
 	
-lnk: unlnk
-	ln -s $$PWD/cloud/views/logged-in.ejs public/scratch-html.html
-	
-unlnk:
-	rm public/scratch-html.html -f
 
 

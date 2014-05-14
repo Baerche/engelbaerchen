@@ -11,7 +11,7 @@ a-scratch/*
 
 OME/
 
-secrets/
+/secrets
 
 zz_build_prod/
 

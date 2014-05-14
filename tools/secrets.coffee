@@ -1,7 +1,5 @@
 #!coffee
 fs = require 'fs'
-appname = 'Mock'
-#secrets = '../secrets'
 secrets = 'secrets'
 
 insertKeys = (globalFile, allKeys) ->
@@ -26,7 +24,7 @@ catch e
 
 config = insertKeys 'config/in-global.json', keys
 ko = JSON.stringify config, null, 1
-fs.writeFileSync secrets + '/global.json', ko
+fs.writeFileSync secrets + '/gen/global.json', ko
 fs.writeFileSync secrets + '/gen/global.js', 'exports.content = ' + ko
 
 k = config.applications['Dev']
@@ -37,9 +35,11 @@ fs.writeFileSync 'public/gen/keys.js', init
 
 
 console.log """
+
 mkdir -p #{ secrets }
 cat >#{ secrets }/keys.json <<KEYS
 #{ fs.readFileSync secrets + '/keys.json' }KEYS
+
 """
 
 
