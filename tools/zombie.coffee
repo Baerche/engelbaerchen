@@ -24,8 +24,8 @@ b.visit u
 	console.log JSON.stringify [ b.success, b.statusCode, b.errors ]
 	console.log b.location.href
 	console.log b.html()
-	b.fill 'username','b'
-	b.fill 'password','c'
+	b.fill 'username','a'
+	b.fill 'password','b'
 	#console.log b.html()
 	b.pressButton 'bekannt'
 #return
