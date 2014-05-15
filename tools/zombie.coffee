@@ -21,20 +21,26 @@ console.log [p.name, p.version]
 b = new Browser(debug: true)
 b.visit u
 .then ewrap () ->
-	console.log JSON.stringify [ b.success, b.statusCode, b.errors ]
-	console.log b.location.href
-	console.log b.html()
+	console.log '---login'
+	#console.log JSON.stringify [ b.success, b.statusCode, b.errors ]
 	b.fill 'username','a'
 	b.fill 'password','b'
 	#console.log b.html()
 	b.pressButton 'bekannt'
 #return
 .then ewrap () ->
-	console.log 'done:'
-	console.log JSON.stringify [ b.success, b.statusCode, b.errors ]
-	#b.dump()
-	console.log b.location.href
+	console.log '---hauptseite'
+.then ewrap () ->
+	console.log '---eintragen'
+	b.fill 'entwurf', """
+		#{new Date()}\r
+		http://url0 ein ahttp://<>url1 text: :mit xu://url2\r
+		mehreren zeilen http://<>url3 http://url4
+	"""
 	console.log b.html()
-	#console.log b.saveCookies()
-	console.log '---'
-
+	#b.pressButton 'Speichern'
+	b.pressButton 'Eintragen'
+.then () ->
+	console.log '---done'
+	console.log b.html()
+	

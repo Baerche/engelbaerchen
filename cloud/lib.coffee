@@ -19,7 +19,7 @@ lib.addBearmark = (user, query) ->
    
 lib.addToBookmarks = (user, rawtext) ->
     b = user.get 'bookmarks'
-    r = rawtext.replace /(\S*?\:.*?)(\s|$)/gm,'<a href="$1">$1</a>$2'
+    r = rawtext.replace /(\b(?:http|https|ftp)\:\S.*?)(\s|$)/g,'<a href="$1">$1</a>$2'
     r = r.replace /\r\n/g, '. '
     b = "{#{r}}<br>#{b}"
     user.set 'bookmarks', b
