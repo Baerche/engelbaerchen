@@ -9,10 +9,15 @@
 # Save-files=all
 
 set -eu
+IFS='
+'
+
+
 G=$GEDIT_CURRENT_DOCUMENT_PATH
 echo : $G
 case ${G##*.} in
 "coffee") coffee $G;;
 "sh") chmod +x $G; $G;;
+"html") chromium-browser $G;;
 *) echo "Unbekannter script-typ" ${G##*.}: $G
 esac

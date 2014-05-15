@@ -1,11 +1,21 @@
-go: inst-cod dev
+go: inst-home dev
+#go: inst-home bear
+#go: loc
+##go: inst-cod dev
 #go: inst-cod
 
 run: dev #compat
 
+bear: #upload bear, like prod-like deploy
+	tools/deploy_bear.sh
+	chromium-browser https://bearmarklet.parseapp.com/ &
+
 dev: # upload dev
 	tools/go.sh
 	
+inst-home:
+	tools/install-home.sh
+
 inst-cod:
 	tools/install-codio.sh
 
@@ -31,7 +41,7 @@ loc: #local server
 	
 prod: #upload prod, vorsicht
 	tools/deploy_prod.sh
-	chromium-browser --user-data-dir=$(HOME)/.config/Brackets/live-dev-profile https://engelbaerchen.parseapp.com/ &
+	chromium-browser https://engelbaerchen.parseapp.com/ &
 	
 wget:
 	mkdir -p local-libs

@@ -14,11 +14,19 @@
  			"applicationId": "blbi1Ys4npksu5tvtfJ1L24atXBLMq4yxCuUkV0V",
           	"javascriptKey": "vYngTqzArEfFE3m35vVJJiaaVx7nRSbOU14OYK8i"
         }, 
+      	"Bear": {
+         	"masterKey": "placeholder",
+ 			"cookieSigningSecret": "placeholder",
+ 			
+ 			"applicationId": "G3IPoWy0Hiiqa04BX1ucOgv9UwO8QiQNAsA0vsUY",
+          	"javascriptKey": "X7Hgl0CCsyO6C28Ne4dm2gO4pMHYxzer5MEKpamP"
+        }, 
        "_default": {
             "link": "Dev"
         }
+        
     },
     "global": {
-        "parseVersion": "1.2.7"
+        "parseVersion": "1.2.18"
     }
 }

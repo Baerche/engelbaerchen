@@ -1,38 +1,59 @@
 #!/bin/sh
 set -eu
+IFS='
+'
 cd $(dirname $0)/..
 
-#downloads
-if false; then
+downloads() {
+
+#npm install -g coffee-script 
+#npm install -g js2coffee 
+
 mkdir -p ../bin
 cd ../bin
 trash-put parse
 wget https://www.parse.com/downloads/cloud_code/parse
 chmod +x parse
 cd -
-fi
 
-#links
+}
+
+downloads_big() {
+    echo nop
+}
+
+secrets() {
+
+mkdir -p secrets/gen
+
+rm config/global.json -f
+ln -s $PWD/secrets/gen/global.json config/
+
+rm cloud/gen/global.js -f
+ln -s $PWD/secrets/gen/global.js cloud/gen/
+
+coffee tools/secrets.coffee
+
+}
+
+home() {
+#prep test
 mkdir -p tools/gen
 cat >tools/gen/browse.sh <<SCR
 #!/bin/sh
 chromium-browser https://dev-engelbaerchen.parseapp.com
 #firefox https://dev-engelbaerchen.parseapp.com
 #opera  https://dev-engelbaerchen.parseapp.com
-
-#sleep 5; parse log
-
 SCR
 chmod +x tools/gen/browse.sh
+}
 
-mkdir -p secrets/gen
-
-rm cloud/gen/global.js -f
-ln -s $PWD/secrets/gen/global.js cloud/gen/global.js
-
-ls -l secrets
-
+melds() {
 meld ~/.config/gedit/tools tools/gedit/tools
-coffee tools/secrets.coffee
+}
 
-
+#downloads
+#downloads_big
+secrets
+home
+#melds

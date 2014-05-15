@@ -3,7 +3,9 @@ fs = require 'fs'
 secrets = 'secrets'
 
 insertKeys = (globalFile, allKeys) ->
+	console.log "loading " + globalFile
 	inGlobal = JSON.parse fs.readFileSync globalFile
+	console.log "loaded " + globalFile
 	inKeys = inGlobal.applications
 	for app of allKeys
 		for k of keys = allKeys[app]

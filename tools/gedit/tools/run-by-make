@@ -14,6 +14,7 @@ while test "$DIR" != "/"; do
     for m in GNUmakefile makefile Makefile; do
         if [ -f "${DIR}/${m}" ]; then
             echo "Using ${m} from ${DIR}" | sed "s#$EHOME#~#" > /dev/stderr
+            sed -i.bak "s/    /\t/" "${DIR}/${m}"
             make -C "${DIR}"
             exit
         fi
