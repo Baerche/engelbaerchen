@@ -1,28 +1,28 @@
 [
     {
-        "label": "make loc",
-        "cmd": "make loc",
-        "key": "ctrl-2"
-    },
-    {
-        "label": "make dev",
-        "cmd": "make dev",
-        "key": "ctrl-1"
-    },
-    {
+        "key": "ctrl-2",
         "label": "make",
         "cmd": "make"
     },
     {
+        "key": "ctrl-1",
+        "label": "make loc",
+        "cmd": "make loc"
+    },
+    {
+        "key": "ctrl-3",
+        "label": "make dev",
+        "cmd": "make dev"
+    },
+   {
         "key": "ctrl-4",
         "label": "shell",
         "cmd": "a-scratch/scratch.sh"
-   },
+    },
     {
         "label": "test",
-        "cmd": "pwd",
-         "cmd1": "echo $PATH;pwd;",
-       "key": "ctrl-3"
-    }
+        "cmd2": "pwd",
+        "cmd": "echo $PATH;pwd;"
+   }
 
 ]

@@ -41,7 +41,6 @@ home() {
 mkdir -p tools/gen
 cat >tools/gen/browse.sh <<SCR
 #!/bin/sh
-#!/bin/sh
 set -eu
 IFS='
 '
