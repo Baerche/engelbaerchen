@@ -15,6 +15,7 @@ window.writeBearmarklet = ->
         In ruhe lassen, zeigt Javascriptern was dann passiert:
         <textarea rows="6" class="bearmarklet">#{_.escape raw}</textarea><p>
         <a href="//#{location.host}/gen/bearmarklet.js">Und was danach passiert.</a>
+        <hr><iframe src="//#{location.host}/gen/bearmarklet.js" style="width:100%; height:13em"></iframe>
     """
 
 isDev = ->
