@@ -1,7 +1,22 @@
 log = lib.log
+ulog = lib.ulog
 
 window.main = ->
-	log "Eingeloggt für ajax? #{Parse.User.current()}"
+	if not lib.ajax then log "kein ajax"; return true
+	u = Parse.User.current()
+	if u
+		ulog 'Eingeloggt, hole Infos'
+		u.fetch()
+		.then (u) ->
+			s = u.get 'username'
+			ulog 'Hallo ' + s
+			$ '#name'
+			.text s + '?'
+			$ '#username'
+			.val s
+		, (e) -> log e
+	else
+		ulog 'Nicht eingeloggt'
 
 window.login = () ->
 	if not lib.ajax then return true

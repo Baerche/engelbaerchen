@@ -1,14 +1,23 @@
+go: loc
 #go: dev
-go: inst-home dev
+#go: inst-home dev
 #go: inst-home bear
-#go: loc
 ##go: inst-cod dev
 #go: inst-cod
 
-BROWSE=chromium-browser
-#BROWSE=opera
+BROWSE=tools/gen/browse.sh
 
 run: dev #compat
+
+loc: #local server
+	coffee -o public/gen/ -c public/*.coffee 
+	coffee -o a-scratch/gen/ -c a-scratch/*.coffee 
+	js2coffee a-scratch/index-js.js >a-scratch/gen/index-js.coffee
+	
+	$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/public/login.html &
+	#$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/public/spiel.html &
+	#$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/a-scratch/index.html &
+	
 
 bear: #upload bear, like prod-like deploy
 	tools/deploy_bear.sh
@@ -32,17 +41,6 @@ sec: #secrets:
 log:
 	tools/log.sh
 
-loc: #local server
-	coffee -o public/gen/ -c public/*.coffee 
-	coffee -o a-scratch/gen/ -c a-scratch/*.coffee 
-	js2coffee a-scratch/index-js.js >a-scratch/gen/index-js.coffee
-	
-	$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/a-scratch/index.html &
-	#$(BROWSE) http://localhost/baerchen/engelbaerchen/a-scratch/index.html &
-	#$(BROWSE) http://localhost//baerchen/work/login.html
-	#$(BROWSE) http://localhost//baerchen/engelbaerchen/public/edit-bookmarks.html &
-	#$(BROWSE) a-scratch/index.html &
-	
 prod: #upload prod, vorsicht
 	tools/deploy_prod.sh
 	chromium-browser https://engelbaerchen.parseapp.com/ &

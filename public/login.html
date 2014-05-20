@@ -11,7 +11,8 @@
 <body onload="main()">
 
 	<h1>Hier spielen Engelchen mit Bärchen.</h1>
-	<h2>Du auch? Und wer bist du?</h2>
+	<h2>Du auch? Und wer bist du?
+    <span id="name"></span></h2>
 	<form action="/login" method="post" id="form">
 		<input type="text" name="username" id="username" placeholder="Username" />
 			<br>
@@ -22,10 +23,10 @@
 		<input type="submit" name="neu_hier" value="Bin neu. Merk dirs Compi :-)" />
 		<input type="hidden" name="robot" id="robot" value="true">
 	</form>
-
+<h2>Oder doch nicht? <a href="logout" onclick="return logout()">Tschaui</a></h2>
 	<div>
 		<hr>
-		<h2>Fachchinesisch fürs Team:</h2>
+		<h2>Fachchinesisch für Teufelchen:</h2>
 		<pre id="log"></pre>
 	</div>
   
