@@ -1,8 +1,12 @@
+#go: dev
 go: inst-home dev
 #go: inst-home bear
 #go: loc
 ##go: inst-cod dev
 #go: inst-cod
+
+BROWSE=chromium-browser
+#BROWSE=opera
 
 run: dev #compat
 
@@ -12,6 +16,9 @@ bear: #upload bear, like prod-like deploy
 
 dev: # upload dev
 	tools/go.sh
+	pwd
+	ls tools/gen
+	tools/gen/browse.sh https://dev-engelbaerchen.parseapp.com/tools.html
 	
 inst-home:
 	tools/install-home.sh
@@ -24,9 +31,6 @@ sec: #secrets:
 	
 log:
 	tools/log.sh
-
-BROWSE=chromium-browser
-#BROWSE=opera
 
 loc: #local server
 	coffee -o public/gen/ -c public/*.coffee 

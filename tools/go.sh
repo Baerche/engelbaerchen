@@ -10,4 +10,4 @@ coffee  -o tools/gen -c tools/*.coffee
 coffee  -o cloud/gen -c cloud/*.coffee
 echo $PATH
 echo deploying; parse deploy
-tools/gen/browse.sh
+#tools/gen/browse.sh

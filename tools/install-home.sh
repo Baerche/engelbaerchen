@@ -41,7 +41,15 @@ home() {
 mkdir -p tools/gen
 cat >tools/gen/browse.sh <<SCR
 #!/bin/sh
-chromium-browser https://dev-engelbaerchen.parseapp.com
+#!/bin/sh
+set -eu
+IFS='
+'
+cd $(dirname $0)/..
+
+chromium-browser \$1
+#ex
+#chromium-browser https://dev-engelbaerchen.parseapp.com
 #firefox https://dev-engelbaerchen.parseapp.com
 #opera  https://dev-engelbaerchen.parseapp.com
 SCR
