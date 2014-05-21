@@ -1,0 +1,31 @@
+.markiert {
+    border-width: 1%;border-width: 1%;border-style: solid
+}
+
+html,body { height: 100%; margin: 0px; padding: 0px; }
+
+.spalten {
+    height:80%
+}
+
+.spalte {
+    height:100%;
+}
+
+.oben {
+    height:50%
+}
+
+.unten {
+    height:50%
+}
+
+.links {
+    float:left;
+    width:50%;
+}
+
+.rechts {
+    float:clear
+}
+

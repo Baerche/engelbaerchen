@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport"content="width=device-width"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="spiel.css">
+    <script src="gen/lib.js"></script>
+    <script src="gen/spiel.js"></script>
+
+    <title>Spiel - Engelbärchen</title>
+</head>
+
+<body onload="main()">
+    <div>
+        Menu: <a href=".">Start</a>
+        | <a href="logout" onclick="return logout()">Tschaui</a>
+        | <a href="login.html">Login</a>
+    </div>
+
+    <div class="spalten">
+        <div class="spalte links ">
+
+            <div class="oben markiert" id="dasBaerchen">Das Bärchen</div>
+            <div class="unten markiert" id="dieBaerchen">Die Bärchen</div>
+
+        </div>
+
+        <div class="spalte rechts">
+
+            <div class="oben markiert">Das Engelchen</div>
+
+            <div class="unten markiert">Die Engelchen</div>
+
+        </div>
+    </div>
+    <!--------->
+    <div>
+        <hr>
+        <h2>Fachchinesisch für Teufelchen:</h2>
+        <pre id="log"></pre>
+    </div>
+
+</body>
+
+</html>

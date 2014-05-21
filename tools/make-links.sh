@@ -13,15 +13,16 @@ ln -s $S $DD
 
 S=$PWD/public
 D=$PWD/a-scratch
-mkdir -p $D
+mkdir -p $D/gen
 #toto find
 #ln -s $S/* $D
 #find public -name *.coffee #-exec echo\;
-find a-scratch/ -maxdepth 1 -type l  -exec rm {} +
-cd a-scratch
+find a-scratch/ -type l  -exec rm {} +
 
-S=../public
+cd $D
+
 cp -s  $S/*.html $S/*.css $S/*.js $S/*.coffee .
+ln -s $S/gen/keys.js gen
 rm *~ -f
 ls -l
 ls
