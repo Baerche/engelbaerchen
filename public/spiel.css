@@ -5,7 +5,8 @@
 html,body { height: 100%; margin: 0px; padding: 0px; }
 
 .spalten {
-    height:80%
+    height:80%;/**/
+    /*width: 240px; height: 320px;/**/
 }
 
 .spalte {
@@ -28,4 +29,6 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
 .rechts {
     float:clear
 }
+
+
 

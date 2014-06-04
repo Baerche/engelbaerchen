@@ -14,8 +14,9 @@ loc: #local server
 	coffee -o a-scratch/gen/ -c a-scratch/*.coffee 
 	js2coffee a-scratch/index-js.js >a-scratch/gen/index-js.coffee
 	
+	$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/public/tools.html &
 	#$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/public/login.html &
-	$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/public/spiel.html &
+	#$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/public/spiel.html &
 	#$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/a-scratch/index.html &
 	
 
