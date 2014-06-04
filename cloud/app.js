@@ -87,8 +87,11 @@ app.post('/login', function (req, res) {
         Parse.User.logIn(req.body.username, req.body.password)
             .then(function (u) {
 				if (req.body.url) {
-					lib.addBearmark(u, req.query);
+					lib.addBearmark(u, req.body);
+					return u.save();
 				}
+                return true;
+            }) .then(function () {
                 res.redirect('/');
                 return true;
             }, function (u, error) {
