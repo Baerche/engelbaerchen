@@ -6,24 +6,35 @@ go: dev
 #go: inst-cod
 
 BROWSE=tools/gen/browse.sh
+RM=trash-put
+#RM="rm -rf"
 
-dev: TAGS # upload dev
-	tools/go.sh
+reinstall: clean coffee TAGS
+	tools/install-home.sh
+	
+coffee:
+	coffee  -o public/gen -c public/*.coffee
+	coffee  -o tools/gen -c tools/*.coffee
+	coffee  -o cloud/gen -c cloud/*.coffee
+	coffee -o a-scratch/gen/ -c a-scratch/*.coffee 
+	js2coffee a-scratch/to-coffee.js >a-scratch/to-coffee-js.coffee
+
+dev: coffee TAGS # upload dev
+	parse deploy
 	$(BROWSE) "https://dev-engelbaerchen.parseapp.com/add_bearmark?url=u:Test&title=Test"
 	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/spiel.html
 	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/
 	
 clean:
-	rm TAGS
-
+	$(RM) TAGS
+	$(RM) public/gen
+	$(RM) tools/gen
+	$(RM) cloud/gen
+	
 TAGS: public/*.coffee
 	ctags -e -R public/*.coffee cloud/*.coffee
 	
-loc: #local server
-	coffee -o public/gen/ -c public/*.coffee 
-	coffee -o a-scratch/gen/ -c a-scratch/*.coffee 
-	js2coffee a-scratch/index-js.js >a-scratch/gen/index-js.coffee
-	
+loc: coffee TAGS #local server
 	$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/public/tools.html &
 	#$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/public/login.html &
 	#$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/public/spiel.html &

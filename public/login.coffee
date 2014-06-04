@@ -16,7 +16,7 @@ window.main = ->
 			.val s
 		, (e) -> log e
 	else
-		ulog 'Nicht eingeloggt'
+		ulog 'Nicht für ajax eingeloggt'
 
 window.login = () ->
 	if not lib.ajax then return true
@@ -33,6 +33,20 @@ window.login = () ->
 			$ "#form"
 			.submit()
 		, 0
+	, (e) ->
+		log "fehlschlag #{e}"
+	false
+	
+window.register = () ->
+	if not lib.ajax then return true
+	username = $("#username").val()
+	password = $("#password").val()
+	#log [username,password]
+	log 'Registriere per ajax'
+	Parse.User.signUp username, password, ACL: new Parse.ACL()
+	.then () ->
+		log 'registriert per ajax, logging in web'
+		window.login()
 	, (e) ->
 		log "fehlschlag #{e}"
 	false

@@ -1,9 +1,11 @@
 window.lib = {}
 exports = window.lib
 
-window.onerror = (errorMsg, url, lineNumber) ->
+window.onerror = (errorMsg, url, lineNumber, error) ->
+    console.log error
     alert JSON.stringify [
         'Hi Progger. window.onerror', errorMsg, url, lineNumber]
+    false
 
 window.main = ->
     alert 'Hallo Progger, kein Main! Bitte eins schreiben'
