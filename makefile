@@ -46,7 +46,7 @@ clean:
 	$(RM) TAGS
 	$(RM) secrets/gen
 	$(RM) public/gen
-	$(RM) tools/gen
+	# $(RM) tools/gen # build by install-*.sh
 	$(RM) cloud/gen
 	
 TAGS: public/*.coffee
