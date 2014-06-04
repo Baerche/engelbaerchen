@@ -1,4 +1,4 @@
-go: clean TAGS
+go: dev
 #go: dev
 #go: inst-home dev
 #go: inst-home bear
@@ -7,11 +7,17 @@ go: clean TAGS
 
 BROWSE=tools/gen/browse.sh
 
+dev: TAGS # upload dev
+	tools/go.sh
+	$(BROWSE) "https://dev-engelbaerchen.parseapp.com/add_bearmark?url=u:Test&title=Test"
+	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/spiel.html
+	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/
+	
 clean:
 	rm TAGS
 
 TAGS: public/*.coffee
-	ctags -e -R public/*.coffee
+	ctags -e -R public/*.coffee cloud/*.coffee
 	
 loc: #local server
 	coffee -o public/gen/ -c public/*.coffee 
@@ -28,13 +34,6 @@ bear: #upload bear, like prod-like deploy
 	tools/deploy_bear.sh
 	chromium-browser https://bearmarklet.parseapp.com/ &
 
-dev: # upload dev
-	tools/go.sh
-	pwd
-	ls tools/gen
-	$(BROWSE) https://dev-engelbaerchen.parseapp.com/spiel.html
-	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/
-	
 inst-home:
 	tools/install-home.sh
 

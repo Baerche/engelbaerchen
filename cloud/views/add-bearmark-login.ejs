@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="gen/lib.js"></script>
+	<script src="gen/login.js"></script>
+	<title>Add bearmark Login - Engelbärchen</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body onload="main()">
+
+	<h1>Add bearmark Login</h1>
+	<h2>Du bist nicht eingeloggt</h2>
+    <span id="name"></span></h2>
+	<form action="/login" method="post" id="form">
+		<h2>Bearmark</h2>
+		Titel <input type="text" name="title" value="<%=title %>" />
+			<br>
+		Url <input type="text" name="url" value="<%=url %>" />
+			<br>
+		<h2>Du bist?</h2>
+		<input type="text" name="username" id="username" placeholder="Username" />
+			<br>
+		<input type="password" name="password" id="password" placeholder="Password" />
+			<br>
+		<input type="submit" name="bekannt" value="Los!" onclick="return login()"/>
+			<p>
+		<input type="submit" name="neu_hier" value="Bin neu. Merk dirs Compi :-)" />
+		<input type="hidden" name="robot" id="robot" value="true">
+	</form>
+<h2>Oder doch nicht? <a href="logout" onclick="return logout()">Tschaui</a></h2>
+	<div>
+		<hr>
+		<h2>Fachchinesisch für Teufelchen:</h2>
+		<pre id="log"></pre>
+	</div>
+  
+</body>
+
+</html>

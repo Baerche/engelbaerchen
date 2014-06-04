@@ -46,7 +46,7 @@ IFS='
 '
 cd $(dirname $0)/..
 
-chromium-browser \$1
+chromium-browser \$1 &
 #ex
 #chromium-browser https://dev-engelbaerchen.parseapp.com
 #firefox https://dev-engelbaerchen.parseapp.com
