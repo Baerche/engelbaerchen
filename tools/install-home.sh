@@ -56,6 +56,8 @@ chmod +x tools/gen/browse.sh
 }
 
 melds() {
+meld ~/.ctags tools/dot/ctags
+meld ~/.config/geany/filedefs/filetypes.Coffeescript.conf tools/geany/filedefs/filetypes.Coffeescript.conf
 meld ~/.config/gedit/tools tools/gedit/tools
 }
 
@@ -63,4 +65,4 @@ meld ~/.config/gedit/tools tools/gedit/tools
 #downloads_big
 secrets
 home
-#melds
+melds

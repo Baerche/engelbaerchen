@@ -1,4 +1,4 @@
-go: loc
+go: clean TAGS
 #go: dev
 #go: inst-home dev
 #go: inst-home bear
@@ -7,8 +7,12 @@ go: loc
 
 BROWSE=tools/gen/browse.sh
 
-run: dev #compat
+clean:
+	rm TAGS
 
+TAGS: public/*.coffee
+	ctags -e -R public/*.coffee
+	
 loc: #local server
 	coffee -o public/gen/ -c public/*.coffee 
 	coffee -o a-scratch/gen/ -c a-scratch/*.coffee 
