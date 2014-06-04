@@ -1,16 +1,33 @@
 go: dev
-#go: dev
-#go: inst-home dev
-#go: inst-home bear
-##go: inst-cod dev
-#go: inst-cod
 
 BROWSE=tools/gen/browse.sh
 RM=trash-put
 #RM="rm -rf"
 
-reinstall: clean coffee TAGS
-	tools/install-home.sh
+bear: reinstall #upload bear, like prod-like deploy
+	tools/deploy_bear.sh
+	chromium-browser https://bearmarklet.parseapp.com/ &
+
+prod: reinstall #upload prod, vorsicht
+	tools/deploy_prod.sh
+	chromium-browser https://engelbaerchen.parseapp.com/ &
+	
+mksecrets:
+	mkdir -p secrets/gen
+	rm config/global.json -f
+	ln -s $$PWD/secrets/gen/global.json config/
+	rm cloud/gen/global.js -f
+	mkdir -p cloud/gen
+	ln -s $$PWD/secrets/gen/global.js cloud/gen/
+	mkdir -p public/gen
+	coffee tools/secrets.coffee
+
+melds:
+	meld ~/.ctags tools/dot/ctags
+	meld ~/.config/geany/filedefs/filetypes.Coffeescript.conf tools/geany/filedefs/filetypes.Coffeescript.conf
+	meld ~/.config/gedit/tools tools/gedit/tools
+
+reinstall: clean mksecrets coffee TAGS
 	
 coffee:
 	coffee  -o public/gen -c public/*.coffee
@@ -27,6 +44,7 @@ dev: coffee TAGS # upload dev
 	
 clean:
 	$(RM) TAGS
+	$(RM) secrets/gen
 	$(RM) public/gen
 	$(RM) tools/gen
 	$(RM) cloud/gen
@@ -41,26 +59,15 @@ loc: coffee TAGS #local server
 	#$(BROWSE) http://127.0.0.1:80/baerchen/engelbaerchen/a-scratch/index.html &
 	
 
-bear: #upload bear, like prod-like deploy
-	tools/deploy_bear.sh
-	chromium-browser https://bearmarklet.parseapp.com/ &
-
 inst-home:
 	tools/install-home.sh
 
 inst-cod:
 	tools/install-codio.sh
 
-sec: #secrets:
-	coffee tools/secrets.coffee
-	
 log:
 	tools/log.sh
 
-prod: #upload prod, vorsicht
-	tools/deploy_prod.sh
-	chromium-browser https://engelbaerchen.parseapp.com/ &
-	
 wget:
 	mkdir -p local-libs
 	cd local-libs;\

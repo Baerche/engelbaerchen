@@ -22,20 +22,6 @@ downloads_big() {
     echo nop
 }
 
-secrets() {
-
-mkdir -p secrets/gen
-
-rm config/global.json -f
-ln -s $PWD/secrets/gen/global.json config/
-
-rm cloud/gen/global.js -f
-ln -s $PWD/secrets/gen/global.js cloud/gen/
-
-coffee tools/secrets.coffee
-
-}
-
 home() {
 #prep test
 mkdir -p tools/gen
@@ -55,14 +41,7 @@ SCR
 chmod +x tools/gen/browse.sh
 }
 
-melds() {
-meld ~/.ctags tools/dot/ctags
-meld ~/.config/geany/filedefs/filetypes.Coffeescript.conf tools/geany/filedefs/filetypes.Coffeescript.conf
-meld ~/.config/gedit/tools tools/gedit/tools
-}
-
 #downloads
 #downloads_big
-secrets
+make reinstall
 home
-melds

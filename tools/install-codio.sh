@@ -33,14 +33,6 @@ mkdir -p secrets/gen
 ln -s $PWD/secrets $C
 cd -
 
-rm config/global.json -f
-ln -s $PWD/secrets/gen/global.json config/
-
-rm cloud/gen/global.js -f
-ln -s $PWD/secrets/gen/global.js cloud/gen/
-
-coffee tools/secrets.coffee
-
 }
 
 home() {
@@ -55,5 +47,5 @@ chmod +x tools/gen/browse.sh
 
 #downloads
 #downloads_big
-secrets
+make reinstall
 home
