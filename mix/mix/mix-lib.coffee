@@ -3,19 +3,19 @@ _ = require 'underscore'
 mix = exports
 
 mix.register = (run) ->
-    lib.define_get '/', mix.index, 
+    lib.defineGet '/', mix.index, 
         title: "Index"
-        main: "gen/logged-in.js"
-    lib.define_post '/', mix.postEntwurf, 
+        mainScript: "gen/logged-in.js"
+    lib.definePost '/', mix.postEntwurf, 
         title: "Index"
-        main: "gen/logged-in.js"
+        mainScript: "gen/logged-in.js"
     if run
         $ ->
-            lib.mixes[run]({},{})
+            lib.gets[run]({},{})
     
 mix.index = (req, res, msg) ->
   u = Parse.User.current()
-  if Parse.User.current()
+  if u
     u.fetch().then ((u) ->
       json = "Es wird nichts untersucht"
       json = JSON.stringify {ajax: lib.ajax, clientSide: lib.clientSide}, null, 1
@@ -28,7 +28,6 @@ mix.index = (req, res, msg) ->
         msg: if msg then msg else ""
         pref: lib.appPrefix
         ajax: lib.ajax
-      console.log args
       lib.render "logged-in.ejs", args
       if lib.clientSide
         $ ".bookmarks"
@@ -55,7 +54,7 @@ mix.addToBookmarks = (user, rawtext) ->
 mix.postEntwurf = (req, res) ->
   console.log req
   u = Parse.User.current()
-  if Parse.User.current()
+  if u
     msg = "Gespeichert"
     u = u.fetch().then((u) ->
       if req.Eintragen
@@ -68,12 +67,12 @@ mix.postEntwurf = (req, res) ->
     ).then(->
         mix.index req, res, msg
     , (u, error) ->
-      mix.render "meldung.ejs",
+      lib.render "meldung.ejs",
         message: "Was kaputt. Konnte Entwurf nicht speichern. "
       return
     )
   else
-    mix.render "meldung.ejs",
+    lib.render "meldung.ejs",
       message: "He dich gibts garnicht?! Entwurf nicht gespeichert."
 
   return

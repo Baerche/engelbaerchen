@@ -28,7 +28,7 @@ if lib.ajax
         """
         
     window.require = (s) ->
-        t = 'cloud/gen/server-lib': 'lib'
+        t = 'cloud/gen/server-lib': 'lib', 'underscore': '_'
         f = t[s]
         window[f]
 
@@ -93,11 +93,17 @@ lib.render = (tmpl, data) ->
     html = new EJS({url: 'views/mix/' + tmpl}).render(data);
     $ 'body'
     .html html
+    window.main(true)
 
-lib.mixes = {}
 
-lib.define_get = (path, fun, ajax) ->
-    lib.mixes[path] = fun
+lib.gets = {}
+lib.posts = {}
+
+lib.defineGet = (path, fun, ajax) ->
+    lib.gets[path] = fun
+
+lib.definePost = (path, fun, ajax) ->
+    lib.posts[path] = fun
 
 lib.appPrefix = "Mix-"
 

@@ -37,7 +37,7 @@ lib.appKeys = () ->
 
 # um omi zu simulieren auf false, normal auf true
 NOT_SIM_OMI  = true 
-NOT_SIM_OMI  = false # debug
+#NOT_SIM_OMI  = false # debug
 
 lib.clientSide = false
 
@@ -49,7 +49,7 @@ lib.render = (tmpl, data) ->
 lib.redirect = (url) ->
 	lib.res.redirect url
 
-lib.define_get = (path, fun, ajax) ->
+lib.defineGet = (path, fun, ajax) ->
 	lib.app.get path, (req, res) ->
 		lib.ajax = NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
 		if lib.ajax
@@ -60,7 +60,7 @@ lib.define_get = (path, fun, ajax) ->
 			lib.res = res
 			fun req.query, res
 
-lib.define_post = (path, fun, ajax) ->
+lib.definePost = (path, fun, ajax) ->
 	lib.app.post path, (req, res) ->
 		lib.ajax = NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
 		if lib.ajax

@@ -1,5 +1,17 @@
 log = lib.log
 
+window.mySubmit = (el) ->
+	if ! lib.ajax then return true
+	a = $('#eintrag')
+	.serializeArray()
+	o = {}
+	o[el.name] = el.value
+	for v in a
+		o[v.name] = v.value
+	log JSON.stringify o
+	mix.postEntwurf(o,{})
+	return false
+
 window.main = ->
 	if lib.ajax
 		log "Eingeloggt für ajax? #{Parse.User.current()}"
@@ -18,3 +30,5 @@ window.writeDates = ->
     log s
     document.getElementById("date").innerHTML = "<small>#{s}</small>"
 
+		
+		

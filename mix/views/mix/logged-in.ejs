@@ -17,12 +17,12 @@
     | <a href="spiel.html">Spiel</a>
     | <a href="tools.html">Tools</a>
 
-    <form action="/" method="post">
+    <form action="/" method="post" id="eintrag">
         <h2>Entwurf von <%=username %></h2>
         <textarea class="edit_plain" name="entwurf" placeholder="Entwurf" rows="5"><%=entwurf %></textarea>
         <br>
-        <input type="submit" value="Speichern" name="Speichern"/>
-        <input type="submit" value="Eintragen" name="Eintragen"/>
+        <input type="submit" value="Speichern" name="Speichern" onclick="return mySubmit(this)"/>
+        <input type="submit" value="Eintragen" name="Eintragen" onclick="return mySubmit(this)"/>
         <button onclick="return loeschen()">Löschen</button>
     </form>
     

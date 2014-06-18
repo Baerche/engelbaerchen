@@ -26,13 +26,8 @@ window.login = () ->
 	log 'logging in für ajax'
 	Parse.User.logIn username, password
 	.then () ->
-		log 'logged in für ajax, logging in web'
-		$ '#robot'
-		.attr 'name','bekannt'
-		setTimeout ->
-			$ "#form"
-			.submit()
-		, 0
+		log 'logged in für ajax, und los'
+		location.href = "/"
 	, (e) ->
 		log "fehlschlag #{e}"
 	false
