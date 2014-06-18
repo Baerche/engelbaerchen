@@ -19,12 +19,12 @@ echo :$DEV_JSKEY,$PROD_JSKEY.
 
 mkdir -p $B
 rsync --del -av ./cloud ./config ./public $B/
-sed -i.bak s/$DEV_APPKEY/$PROD_APPKEY/ $B/cloud/gen/lib.js
+sed -i.bak s/$DEV_APPKEY/$PROD_APPKEY/ $B/cloud/gen/server-lib.js
 sed -i.bak s/$DEV_APPKEY/$PROD_APPKEY/ $B/public/gen/keys.js
 sed -i.bak s/$DEV_JSKEY/$PROD_JSKEY/ $B/public/gen/keys.js
 sed -i.bak s/dev-engelbaerchen/engelbaerchen/ $B/public/gen/bearmarklet.js
-grep "appKey = " cloud/gen/lib.js 
-grep "appKey = " $B/cloud/gen/lib.js 
+grep "appKey = " cloud/gen/server-lib.js 
+grep "appKey = " $B/cloud/gen/server-lib.js  
 cat public/gen/keys.js
 cat $B/public/gen/keys.js
 cat $B/public/gen/bearmarklet.js
