@@ -27,6 +27,7 @@ scratch-*
 
 /public/x
 
+/mix/mix/gen
 /cloud/mix
 /cloud/views/mix
 /public/mix
