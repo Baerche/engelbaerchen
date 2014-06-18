@@ -22,8 +22,9 @@ downloads_big() {
     echo nop
 }
 
-home() {
+browser() {
 #prep test
+echo BROWER
 mkdir -p tools/gen
 cat >tools/gen/browse.sh <<SCR
 #!/bin/sh
@@ -33,10 +34,7 @@ IFS='
 cd $(dirname $0)/..
 
 chromium-browser \$1 &
-#ex
-#chromium-browser https://dev-engelbaerchen.parseapp.com
-#firefox https://dev-engelbaerchen.parseapp.com
-#opera  https://dev-engelbaerchen.parseapp.com
+#firefox  \$1 &
 SCR
 chmod +x tools/gen/browse.sh
 }
@@ -44,4 +42,4 @@ chmod +x tools/gen/browse.sh
 #downloads
 #downloads_big
 make reinstall
-home
+browser

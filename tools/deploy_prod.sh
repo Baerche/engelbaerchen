@@ -15,7 +15,7 @@ echo :$DEV_JSKEY,$PROD_JSKEY.
 
 mkdir -p $B
 rsync --del -av ./cloud ./config ./public $B/
-sed -i.bak s/$DEV_APPKEY/$PROD_APPKEY/ $B/cloud/gen/lib.js
+sed -i.bak s/$DEV_APPKEY/$PROD_APPKEY/ $B/cloud/gen/server-lib.js
 sed -i.bak s/$DEV_APPKEY/$PROD_APPKEY/ $B/public/gen/keys.js
 sed -i.bak s/$DEV_JSKEY/$PROD_JSKEY/ $B/public/gen/keys.js
 sed -i.bak s/dev-engelbaerchen/engelbaerchen/ $B/public/gen/bearmarklet.js

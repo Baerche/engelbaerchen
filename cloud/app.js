@@ -7,7 +7,8 @@ var fs = require('fs');
 var _ = require('underscore');
 
 var config = require('cloud/gen/global').content;
-var lib = require('cloud/gen/lib');
+var lib = require('cloud/gen/server-lib');
+var mix = require ('cloud/mix/gen/mix-lib');
 
 var keys = lib.appKeys();
 
@@ -25,39 +26,9 @@ app.use(parseExpressCookieSession({
     }
 }));
 
-app.get('/', function (req, res) {
-    var u = Parse.User.current();
-    if (Parse.User.current()) {
-        u.fetch()
-            .then(function (u) {
-                json = 'Es wird nichts untersucht';
-                if (u.getUsername() === "admin") {
-                	try{
-						json = [json, 'auch nicht als admin'];
-					} catch (e) {
-						json = {error: e};
-					}
-					json = JSON.stringify(json, null, 4);
-				}
-                res.render('logged-in.ejs', {
-                    username: u.getUsername(),
-                    json: json,
-                    entwurf: u.get('entwurf'),
-                    bookmarks: u.get('bookmarks'),
-                    msg: req.query.msg ? req.query.msg : "",
-                    pref: lib.appPrefix
-                });
-                return true;
-            }, function (error) {
-                console.error(error);
-                res.render('meldung.ejs', {
-                    message: 'Hier drin ging was kaputt.'
-                });
-            });
-    } else {
-        res.redirect('/login.html');
-    }
-});
+//app.get('/', lib.index);
+lib.app = app;
+mix.register();
 
 app.get('/add_bearmark', function (req, res) {
     var u = Parse.User.current();

@@ -14,6 +14,6 @@ elByName = (s) ->
 
 window.writeDates = ->
     s = new Date().toString().match(/(.*)GMT/)[1]
-    document.write "<small>#{s}</small>"
-    document.title = document.title + " " + s
+    log s
+    document.getElementById("date").innerHTML = "<small>#{s}</small>"
 

@@ -38,5 +38,27 @@ lib.appKeys = () ->
 	a = appFromKey appKey, config.applications
 	a[1]
 
+#
+# für mix
+#
+
+lib.clientSide = false
+
 lib.appPrefix = "#{if lib.appName()=='Dev' then 'Dev-' else ''}"
 
+lib.define_get = (path, fun, ajax) ->
+	lib.app.get path, (req, res) ->
+		lib.ajax = ! req.headers["user-agent"].match /Opera Mini/
+		if lib.ajax
+			res.render "ajax", 
+				path: path
+				ajax: ajax
+		else
+			lib.res = res
+			fun req.query, res
+
+lib.render = (tmpl, data) ->
+	lib.res.render "mix/" + tmpl, data
+	
+lib.redirect = (url) ->
+	lib.res.redirect url

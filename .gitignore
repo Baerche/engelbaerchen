@@ -1,25 +1,35 @@
-config/global.json
-cloud/keys.json.js
-h
+/config/global.json
+/cloud/keys.json.js
+/h
+
 */gen/
 *.log
 *~
 *.orig
 
-a-scratch/*
-!a-scratch/templates/
+/a-scratch/*
+!/a-scratch/templates/
 
-OME/
+/OME/
 
 /secrets
 
-zz_build_*/
+/zz_build_*/
 
-local-libs/
-a-lighttable/
+/local-libs/
+/a-lighttable/
 
 scratch-*
 
 *.bak
 
-TAGS
+/TAGS
+
+/public/x
+
+/cloud/mix
+/cloud/views/mix
+/public/mix
+/public/views/mix
+
+*.geany
