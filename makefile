@@ -95,5 +95,6 @@ wget_dir:
 	mkdir -p local-libs
 
 wget_ejs: wget_dir
-	cd local-libs; wget -c https://embeddedjavascript.googlecode.com/files/ejs_production.js
+	mkdir -p public/x
+	cd public/x; wget -c https://embeddedjavascript.googlecode.com/files/ejs_production.js
 

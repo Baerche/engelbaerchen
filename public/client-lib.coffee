@@ -17,14 +17,12 @@ if lib.ajax
             <script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-            <script src="//embeddedjavascript.googlecode.com/files/ejs_production.js"></script>
-         """
+        """
     else
         document.write """
             <script src="../local-libs/parse-1.2.18.min.js"></script>
             <script src="../local-libs/jquery.min.js"></script>
             <script src="../local-libs/underscore-min.js"></script>
-            <script src="../local-libs/ejs_production.js"></script>
         """
         
     window.require = (s) ->
@@ -33,7 +31,8 @@ if lib.ajax
         window[f]
 
     document.write """
-        <script src="gen/keys.js"></script>
+         <script src="x/ejs_production.js"></script>
+         <script src="gen/keys.js"></script>
         <script src="lib-js.js"></script>
         <script>
             window.exports = {}
