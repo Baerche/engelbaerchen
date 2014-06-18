@@ -1,4 +1,4 @@
-#go: copy_mix coffee
+#go: coffee
 #go: reinstall dev
 go: dev
 

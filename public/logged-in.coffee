@@ -1,7 +1,8 @@
 log = lib.log
 
 window.main = ->
-    log "Eingeloggt für ajax? #{Parse.User.current()}"
+	if lib.ajax
+		log "Eingeloggt für ajax? #{Parse.User.current()}"
 
 window.loeschen = () ->
     elByName "entwurf"

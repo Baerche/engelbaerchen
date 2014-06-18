@@ -1,6 +1,7 @@
 window.lib = {}
+lib.ajax = window.useAjax
 
-if false
+if true
     window.onerror = (errorMsg, url, lineNumber, error) ->
         console.log error
         alert JSON.stringify [
@@ -10,8 +11,7 @@ if false
 window.main = ->
     alert 'Hallo Progger, kein Main! Bitte eins schreiben'
 
-if not window.operamini
-    lib.ajax = true
+if lib.ajax
     if not location.host.match /localhost|127\.0\.0\.1/
         document.write """
             <script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
@@ -54,7 +54,6 @@ if not window.operamini
         .text "#{_.escape if o then  o.toString() else o}\n"
         o
 else
-    lib.ajax = false
     log = (o) -> o
     ulog = (o) -> o
 

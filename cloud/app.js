@@ -27,6 +27,8 @@ app.use(parseExpressCookieSession({
 }));
 
 //app.get('/', lib.index);
+//app.post('/', mix.postEntwurf);
+
 lib.app = app;
 mix.register();
 
@@ -89,35 +91,7 @@ app.post('/login', function (req, res) {
         });
     }
 });
-app.post('/post_entwurf', function (req, res) {
-    var u = Parse.User.current();
-    if (Parse.User.current()) {
-        var msg ="Gespeichert";
-        u = u.fetch()
-            .then(function (u) {
-                if (req.body.Eintragen) {
-                    lib.addToBookmarks(u, _.escape(req.body.entwurf));
-                    msg += " und eingetragen";
-	                u.set('entwurf', '');
-                } else {
-	                u.set('entwurf', req.body.entwurf);
-                }
-                return u.save();
-            })
-            .then(function () {
-                res.redirect('/?msg=' + encodeURIComponent(msg));
-                return true;
-            }, function (u, error) {
-                res.render('meldung.ejs', {
-                    message: 'Was kaputt. Konnte Entwurf nicht speichern. '
-                });
-            });
-    } else {
-        res.render('meldung.ejs', {
-            message: 'He dich gibts garnicht?! Entwurf nicht gespeichert.'
-        });
-    }
-});
+
 app.post('/echo', function (req, res) {
     res.render('meldung.ejs', {
         message: 'echo post args: ' + JSON.stringify(req.body, null, 1)

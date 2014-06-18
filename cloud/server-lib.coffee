@@ -17,13 +17,6 @@ lib.addBearmark = (user, query) ->
     b = u + b
     user.set 'bookmarks', b
    
-lib.addToBookmarks = (user, rawtext) ->
-    b = user.get 'bookmarks'
-    r = rawtext.replace /(\b(?:http|https|ftp)\:\S.*?)(\s|$)/g,'<a href="$1">$1</a>$2'
-    r = r.replace /\r\n/g, '. '
-    b = "{#{r}}<br>#{b}"
-    user.set 'bookmarks', b
-
 appFromKey = (key,apps) ->
 	for i of apps
 		if apps[i].applicationId == key
@@ -42,13 +35,23 @@ lib.appKeys = () ->
 # für mix
 #
 
+# um omi zu simulieren auf false, normal auf true
+NOT_SIM_OMI  = true 
+NOT_SIM_OMI  = false # debug
+
 lib.clientSide = false
 
 lib.appPrefix = "#{if lib.appName()=='Dev' then 'Dev-' else ''}"
 
+lib.render = (tmpl, data) ->
+	lib.res.render "mix/" + tmpl, data
+	
+lib.redirect = (url) ->
+	lib.res.redirect url
+
 lib.define_get = (path, fun, ajax) ->
 	lib.app.get path, (req, res) ->
-		lib.ajax = ! req.headers["user-agent"].match /Opera Mini/
+		lib.ajax = NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
 		if lib.ajax
 			res.render "ajax", 
 				path: path
@@ -57,8 +60,14 @@ lib.define_get = (path, fun, ajax) ->
 			lib.res = res
 			fun req.query, res
 
-lib.render = (tmpl, data) ->
-	lib.res.render "mix/" + tmpl, data
-	
-lib.redirect = (url) ->
-	lib.res.redirect url
+lib.define_post = (path, fun, ajax) ->
+	lib.app.post path, (req, res) ->
+		lib.ajax = NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
+		if lib.ajax
+			res.render "ajax", 
+				path: path
+				ajax: ajax
+		else
+			lib.res = res
+			fun req.body, res
+

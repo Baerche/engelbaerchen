@@ -4,10 +4,10 @@
 <head>
     <link rel="stylesheet" type="text/css" href="logged-in.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script> var useAjax = false </script>
 	<script src="gen/client-lib.js"></script>
 	<script src="gen/logged-in.js"></script>
 	<title><%=username %>@<%=pref %>Engelbärchen</title>
-
 </head>
 <body onload="main()">
 	<span id="date"><small>noscript</small></span>
@@ -17,7 +17,7 @@
     | <a href="spiel.html">Spiel</a>
     | <a href="tools.html">Tools</a>
 
-    <form action="post_entwurf" method="post">
+    <form action="/" method="post">
         <h2>Entwurf von <%=username %></h2>
         <textarea class="edit_plain" name="entwurf" placeholder="Entwurf" rows="5"><%=entwurf %></textarea>
         <br>
