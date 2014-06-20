@@ -1,7 +1,7 @@
 log = lib.log
 
 window.mySubmit = (el) ->
-	return lib.submitAjax(mix.postEntwurf,'#eintrag')
+	return lib.submitAjax(mix.postEntwurf,el)
 
 window.main = ->
 	if lib.ajax

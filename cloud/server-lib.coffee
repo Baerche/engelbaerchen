@@ -43,12 +43,6 @@ lib.clientSide = false
 
 lib.appPrefix = "#{if lib.appName()=='Dev' then 'Dev-' else ''}"
 
-lib.render = (tmpl, data) ->
-	lib.res.render "mix/" + tmpl, data
-	
-lib.redirect = (url) ->
-	lib.res.redirect url
-
 lib.defineGet = (path, fun, ajax) ->
 	lib.app.get path, (req, res) ->
 		lib.ajax = NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/

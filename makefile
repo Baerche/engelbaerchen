@@ -14,12 +14,12 @@ dev: coffee TAGS # upload dev
 	$(BROWSE) https://dev-engelbaerchen.parseapp.com/
 	
 coffee:
-	coffee -o public/gen -c public/*.coffee
+	coffee -m -o public/gen -c public/*.coffee
 	coffee -o tools/gen -c tools/*.coffee
 	coffee -o cloud/gen -c cloud/*.coffee
-	coffee -o mix/mix/gen/ -c mix/mix/*.coffee 
-	#coffee -o a-scratch/gen/ -c a-scratch/*.coffee 
+	coffee -m -o mix/mix/gen/ -c mix/mix/*.coffee 
 	js2coffee a-scratch/to-coffee.js >a-scratch/to-coffee-js.coffee
+	coffee -m -o a-scratch/gen/ -c a-scratch/*.coffee 
 	
 	#eigentlich nicht coffee, aber q&d
 	cp -a mix/* cloud/

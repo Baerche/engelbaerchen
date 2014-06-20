@@ -11,7 +11,7 @@ mix.register = (run) ->
         mainScript: "gen/logged-in.js"
     if run
         $ ->
-            lib.gets[run]({},new lib.AjaxRes())
+            lib.trap(lib.gets[run])({}, new lib.AjaxRes())
     
 mix.index = (req, res, msg) ->
   u = Parse.User.current()
@@ -28,14 +28,14 @@ mix.index = (req, res, msg) ->
         msg: if msg then msg else ""
         pref: lib.appPrefix
         ajax: lib.ajax
-      res.render "logged-in.ejs", args
+      res.render "mix/logged-in.ejs", args
       if lib.clientSide
         $ ".bookmarks"
         .html args.bookmarks
       true
     ), (error) ->
       console.error error
-      res.render "meldung.ejs",
+      res.render "mix/meldung.ejs",
         message: "Hier drin ging was kaputt."
       return
 
@@ -66,12 +66,12 @@ mix.postEntwurf = (req, res) ->
     ).then(->
         mix.index req, res, msg
     , (u, error) ->
-      res.render "meldung.ejs",
+      res.render "mix/meldung.ejs",
         message: "Was kaputt. Konnte Entwurf nicht speichern. "
       return
     )
   else
-    lib.render "meldung.ejs",
+    lib.render "mix/meldung.ejs",
       message: "He dich gibts garnicht?! Entwurf nicht gespeichert."
 
   return

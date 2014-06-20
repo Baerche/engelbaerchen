@@ -3,10 +3,21 @@ lib.ajax = window.useAjax
 
 if true
     window.onerror = (errorMsg, url, lineNumber, error) ->
-        console.log error
+        if error then console.log error #dauernull, nur neue browser
         alert JSON.stringify [
-            'Hi Progger. window.onerror', errorMsg, url, lineNumber]
+            'Hi Progger. Console öffnen und nochmal testen.', errorMsg, url, lineNumber]
         false
+
+lib.trap = (fun) ->
+	(args...) ->
+		try fun args...
+		catch e
+			#console.log e # nur desc
+			#console.trace() # only functions
+			console.log (e.stack) #desc und functions mit source-url (ohne sourcemap)
+			debugger
+			#alert 'Schau für Teufelchen in console: ' + e
+			throw e
 
 window.main = ->
     alert 'Hallo Progger, kein Main! Bitte eins schreiben'
@@ -98,7 +109,7 @@ lib.AjaxRes = () ->
 	@render = (tmpl, data) ->
 		$ 'body'
 		.html "<h1>Moment</h1>"
-		html = new EJS({url: 'views/mix/' + tmpl}).render(data);
+		html = new EJS({url: 'views/' + tmpl}).render(data);
 		$ 'body'
 		.html html
 		window.main(true)
@@ -107,12 +118,11 @@ lib.AjaxRes = () ->
 	@
 
 #testet auch auf ajax, sonst return false für autopost
-lib.postEntwurf = (fun,formId) ->
+lib.submitAjax = lib.trap (fun,submitButtonRaw) ->
 	if ! lib.ajax then return true
-	a = $(fun)
-	.serializeArray()
+	a = $(submitButtonRaw.form).serializeArray()
 	o = {}
-	o[el.name] = el.value
+	o[submitButtonRaw.name] = submitButtonRaw.value
 	for v in a
 		o[v.name] = v.value
 	#log JSON.stringify o
