@@ -1,5 +1,7 @@
 _ = require 'underscore'
-config = require('cloud/gen/global').content;
+config = require('cloud/gen/global').content
+debug = require('cloud/mix/gen/debug-config')
+
 lib = exports
 
 # Parse.applicationId missing while deploy
@@ -36,16 +38,13 @@ lib.appKeys = () ->
 #
 
 # um omi zu simulieren auf false, normal auf true
-NOT_SIM_OMI  = true 
-#NOT_SIM_OMI  = false # debug
-
 lib.clientSide = false
 
 lib.appPrefix = "#{if lib.appName()=='Dev' then 'Dev-' else ''}"
 
 lib.defineGet = (path, fun, ajax) ->
 	lib.app.get path, (req, res) ->
-		lib.ajax = NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
+		lib.ajax = debug.NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
 		if lib.ajax
 			res.render "ajax", 
 				path: path
@@ -56,7 +55,7 @@ lib.defineGet = (path, fun, ajax) ->
 
 lib.definePost = (path, fun, ajax) ->
 	lib.app.post path, (req, res) ->
-		lib.ajax = NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
+		lib.ajax = debug.NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
 		if lib.ajax
 			res.render "ajax", 
 				path: path

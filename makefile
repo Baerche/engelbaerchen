@@ -1,6 +1,7 @@
 #go: coffee
 #go: reinstall dev
-go: dev
+go:  fixtabs dev
+#go: dev
 
 BROWSE=tools/gen/browse.sh
 RM=trash-put
@@ -9,22 +10,38 @@ RM=trash-put
 dev: coffee TAGS # upload dev
 	pwd
 	parse deploy
+	$(BROWSE) https://dev-engelbaerchen.parseapp.com/debug.html
 	#$(BROWSE) "https://dev-engelbaerchen.parseapp.com/add_bearmark?url=u:Test&title=Test"
 	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/spiel.html
-	$(BROWSE) https://dev-engelbaerchen.parseapp.com/
+	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/
+	
 	
 coffee:
+
 	coffee -m -o public/gen -c public/*.coffee
+	
 	coffee -o tools/gen -c tools/*.coffee
+	
 	coffee -o cloud/gen -c cloud/*.coffee
+	
 	coffee -m -o mix/mix/gen/ -c mix/mix/*.coffee 
+	
 	js2coffee a-scratch/to-coffee.js >a-scratch/to-coffee-js.coffee
+	
 	coffee -m -o a-scratch/gen/ -c a-scratch/*.coffee 
 	
 	#eigentlich nicht coffee, aber q&d
 	cp -a mix/* cloud/
 	cp -a mix/* public/
 	sed -i '/<!DOCTYPE html>/,/<body/d; /<\/body>/,/<\html>/ d' public/views/mix/*.ejs
+
+fixtabs:
+	tools/expand.py -i -t 4 public/*.coffee
+	tools/expand.py -i -t 4 tools/*.coffee
+	tools/expand.py -i -t 4 public/*.coffee
+	tools/expand.py -i -t 4 mix/mix/*.coffee
+	tools/expand.py -i -t 4 a-scratch/*.coffee
+	#make go
 
 
 clean:
@@ -39,6 +56,7 @@ clean:
 	$(RM) cloud/views/mix
 	$(RM) public/mix
 	$(RM) public/views/mix
+	$(RM) zz_build_*
 	
 bear: reinstall #upload bear, like prod-like deploy
 	tools/deploy_bear.sh

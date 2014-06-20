@@ -1,6 +1,4 @@
 window.lib = {}
-lib.ajax = window.useAjax
-
 if true
     window.onerror = (errorMsg, url, lineNumber, error) ->
         if error then console.log error #dauernull, nur neue browser
@@ -8,16 +6,30 @@ if true
             'Hi Progger. Console öffnen und nochmal testen.', errorMsg, url, lineNumber]
         false
 
+lib.ajax = debug.NOT_SIM_OMI and 
+    if window.useAjax != undefined 
+        window.useAjax
+    else
+        ! (window.opera && opera.mini)
+
 lib.trap = (fun) ->
-	(args...) ->
-		try fun args...
-		catch e
-			#console.log e # nur desc
-			#console.trace() # only functions
-			console.log (e.stack) #desc und functions mit source-url (ohne sourcemap)
-			debugger
-			#alert 'Schau für Teufelchen in console: ' + e
-			throw e
+    (args...) ->
+        try fun args...
+        catch e
+            #console.log e # nur desc
+            #console.trace() # only functions
+            console.log (e.stack) #desc und functions mit source-url (ohne sourcemap)
+            debugger
+            #alert 'Schau für Teufelchen in console: ' + e
+            throw e
+
+window.require = lib.trap (s) ->
+    t = 'cloud/gen/server-lib': 'lib'
+        , 'underscore': '_'
+        , 'cloud/mix/gen/debug-config' : 'debug'
+    f = t[s]
+    window[f] or throw new Error("require fehlt: " + s)
+
 
 window.main = ->
     alert 'Hallo Progger, kein Main! Bitte eins schreiben'
@@ -36,11 +48,6 @@ if lib.ajax
             <script src="../local-libs/underscore-min.js"></script>
         """
         
-    window.require = (s) ->
-        t = 'cloud/gen/server-lib': 'lib', 'underscore': '_'
-        f = t[s]
-        window[f]
-
     document.write """
          <script src="x/ejs_production.js"></script>
          <script src="gen/keys.js"></script>
@@ -106,28 +113,28 @@ lib.definePost = (path, fun, ajax) ->
 lib.appPrefix = "Mix-"
 
 lib.AjaxRes = () ->
-	@render = (tmpl, data) ->
-		$ 'body'
-		.html "<h1>Moment</h1>"
-		html = new EJS({url: 'views/' + tmpl}).render(data);
-		$ 'body'
-		.html html
-		window.main(true)
-	@redirect = (url) ->
-		location.href = url
-	@
+    @render = (tmpl, data) ->
+        $ 'body'
+        .html "<h1>Moment</h1>"
+        html = new EJS({url: 'views/' + tmpl}).render(data);
+        $ 'body'
+        .html html
+        window.main(true)
+    @redirect = (url) ->
+        location.href = url
+    @
 
 #testet auch auf ajax, sonst return false für autopost
 lib.submitAjax = lib.trap (fun,submitButtonRaw) ->
-	if ! lib.ajax then return true
-	a = $(submitButtonRaw.form).serializeArray()
-	o = {}
-	o[submitButtonRaw.name] = submitButtonRaw.value
-	for v in a
-		o[v.name] = v.value
-	#log JSON.stringify o
-	fun(o, new lib.AjaxRes())
-	return false
+    if ! lib.ajax then return true
+    a = $(submitButtonRaw.form).serializeArray()
+    o = {}
+    o[submitButtonRaw.name] = submitButtonRaw.value
+    for v in a
+        o[v.name] = v.value
+    #log JSON.stringify o
+    fun(o, new lib.AjaxRes())
+    return false
 
 
 # zu konvertieren

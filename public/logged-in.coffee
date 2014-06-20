@@ -1,11 +1,11 @@
 log = lib.log
 
-window.mySubmit = (el) ->
-	return lib.submitAjax(mix.postEntwurf,el)
-
 window.main = ->
-	if lib.ajax
-		log "Eingeloggt für ajax? #{Parse.User.current()}"
+    if lib.ajax
+        log "Eingeloggt für ajax? #{Parse.User.current()}"
+
+window.mySubmit = (el) ->
+    if lib.ajax then return lib.submitAjax(mix.postEntwurf,el)
 
 window.loeschen = () ->
     elByName "entwurf"
@@ -21,5 +21,5 @@ window.writeDates = ->
     log s
     document.getElementById("date").innerHTML = "<small>#{s}</small>"
 
-		
-		
+        
+        

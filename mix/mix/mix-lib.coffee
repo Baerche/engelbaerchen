@@ -1,17 +1,52 @@
 lib = require 'cloud/gen/server-lib'
 _ = require 'underscore'
+debug = require ('cloud/mix/gen/debug-config')
 mix = exports
 
 mix.register = (run) ->
+
     lib.defineGet '/', mix.index, 
         title: "Index"
         mainScript: "gen/logged-in.js"
     lib.definePost '/', mix.postEntwurf, 
         title: "Index"
         mainScript: "gen/logged-in.js"
+        
+    lib.defineGet '/debug.html', mix.debug, 
+        mainScript: "gen/nop.js"
+    lib.definePost '/', mix.postDebug, 
+        mainScript: "gen/nop.js"
+        
     if run
         $ ->
             lib.trap(lib.gets[run])({}, new lib.AjaxRes())
+
+mix.debug = (req, res, msg) ->
+    lo = debug: debug
+    render = () -> 
+        lo.now = new Date()
+        console.log lo
+        res.render "mix/debug.ejs", msg: JSON.stringify lo, null, 4
+    if true
+        Parse.Cloud.run "debug", {a: 1}
+        .then (result) ->
+            lo.sollteOk = result
+        , (error) ->
+            lo.gingWirklichSchief = error
+            render()
+        .then ->
+            Parse.Cloud.run "debugFail", {a: 1}
+            .then (result) ->
+                lo.sollteNichtOk = result
+            , (error) ->
+                lo.gingGewolltSchief = error
+                render()
+        .then ->
+            lo.huch = true
+            render()
+        
+mix.postDebug = (req, res, msg) ->
+    mix.debug req, res, "dummy-done"
     
 mix.index = (req, res, msg) ->
   u = Parse.User.current()
@@ -40,7 +75,7 @@ mix.index = (req, res, msg) ->
       return
 
   else
-    lib.redirect "login.html"
+    res.redirect "login.html"
   return
 
 mix.addToBookmarks = (user, rawtext) ->
@@ -75,3 +110,4 @@ mix.postEntwurf = (req, res) ->
       message: "He dich gibts garnicht?! Entwurf nicht gespeichert."
 
   return
+
