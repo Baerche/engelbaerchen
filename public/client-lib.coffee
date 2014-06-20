@@ -83,18 +83,6 @@ lib.keinGrosserBrowserDannZurueck = ->
 
 lib.clientSide = true
 
-lib.redirect = (url) ->
-    location.href = url
-
-lib.render = (tmpl, data) ->
-    $ 'body'
-    .html "<h1>Moment</h1>"
-    html = new EJS({url: 'views/mix/' + tmpl}).render(data);
-    $ 'body'
-    .html html
-    window.main(true)
-
-
 lib.gets = {}
 lib.posts = {}
 
@@ -105,6 +93,32 @@ lib.definePost = (path, fun, ajax) ->
     lib.posts[path] = fun
 
 lib.appPrefix = "Mix-"
+
+lib.AjaxRes = () ->
+	@render = (tmpl, data) ->
+		$ 'body'
+		.html "<h1>Moment</h1>"
+		html = new EJS({url: 'views/mix/' + tmpl}).render(data);
+		$ 'body'
+		.html html
+		window.main(true)
+	@redirect = (url) ->
+		location.href = url
+	@
+
+#testet auch auf ajax, sonst return false für autopost
+lib.postEntwurf = (fun,formId) ->
+	if ! lib.ajax then return true
+	a = $(fun)
+	.serializeArray()
+	o = {}
+	o[el.name] = el.value
+	for v in a
+		o[v.name] = v.value
+	#log JSON.stringify o
+	fun(o, new lib.AjaxRes())
+	return false
+
 
 # zu konvertieren
 

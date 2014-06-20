@@ -11,7 +11,7 @@ mix.register = (run) ->
         mainScript: "gen/logged-in.js"
     if run
         $ ->
-            lib.gets[run]({},{})
+            lib.gets[run]({},new lib.AjaxRes())
     
 mix.index = (req, res, msg) ->
   u = Parse.User.current()
@@ -28,14 +28,14 @@ mix.index = (req, res, msg) ->
         msg: if msg then msg else ""
         pref: lib.appPrefix
         ajax: lib.ajax
-      lib.render "logged-in.ejs", args
+      res.render "logged-in.ejs", args
       if lib.clientSide
         $ ".bookmarks"
         .html args.bookmarks
       true
     ), (error) ->
       console.error error
-      lib.render "meldung.ejs",
+      res.render "meldung.ejs",
         message: "Hier drin ging was kaputt."
       return
 
@@ -52,7 +52,6 @@ mix.addToBookmarks = (user, rawtext) ->
 
 
 mix.postEntwurf = (req, res) ->
-  console.log req
   u = Parse.User.current()
   if u
     msg = "Gespeichert"
@@ -67,7 +66,7 @@ mix.postEntwurf = (req, res) ->
     ).then(->
         mix.index req, res, msg
     , (u, error) ->
-      lib.render "meldung.ejs",
+      res.render "meldung.ejs",
         message: "Was kaputt. Konnte Entwurf nicht speichern. "
       return
     )
