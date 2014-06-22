@@ -1,6 +1,6 @@
 #go: coffee
 #go: reinstall dev
-go:  fixtabs dev
+go:  dev
 #go: dev
 
 BROWSE=tools/gen/browse.sh

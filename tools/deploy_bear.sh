@@ -8,6 +8,8 @@ A=Bear
 
 B=zz_build_$A
 
+git log -1 | grep commit >public/commit.txt
+
 rm public/scratch-* -f
 
 DEV_APPKEY=$(coffee tools/keys.coffee Dev applicationId)

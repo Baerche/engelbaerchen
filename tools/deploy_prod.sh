@@ -3,9 +3,12 @@ set -eu
 cd $(dirname $0)/..
 
 #A=Bear
+#A=Dev
 A=Prod
 
 B=zz_build_$A
+
+git log -1 | grep commit >public/commit.txt
 
 rm public/scratch-* -f
 
