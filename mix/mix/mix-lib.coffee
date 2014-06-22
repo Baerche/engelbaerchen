@@ -24,8 +24,6 @@ mix.register = (run) ->
 mix.debug = (req, res, msg) ->
     lo = debug: debug
     render = () -> 
-        lo.now = new Date()
-        console.log lo
         res.render "mix/debug.ejs", msg: JSON.stringify lo, null, 4
     if true
         Parse.Cloud.run "debug", {a: 1}
