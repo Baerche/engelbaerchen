@@ -136,6 +136,6 @@ lib.submitAjax = lib.trap (fun,submitButtonRaw) ->
     fun(o, new lib.AjaxRes())
     return false
 
-
-# zu konvertieren
+lib.ejsEsc = (s) ->
+    _.escape s
 

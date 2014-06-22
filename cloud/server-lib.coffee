@@ -64,3 +64,5 @@ lib.definePost = (path, fun, ajax) ->
 			lib.res = res
 			fun req.body, res
 
+lib.ejsEsc = (s) ->
+    s

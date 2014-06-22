@@ -24,7 +24,9 @@ mix.register = (run) ->
 mix.debug = (req, res, msg) ->
     lo = debug: debug
     render = () -> 
-        res.render "mix/debug.ejs", msg: JSON.stringify lo, null, 4
+        res.render "mix/debug.ejs", 
+            msg: lib.ejsEsc JSON.stringify lo, null, 4
+            grrr: lib.ejsEsc "<b>bold</b>"
     if true
         Parse.Cloud.run "debug", {a: 1}
         .then (result) ->
@@ -54,13 +56,12 @@ mix.index = (req, res, msg) ->
       json = JSON.stringify {ajax: lib.ajax, clientSide: lib.clientSide}, null, 1
       #json = JSON.stringify req.headers, null, 1
       args = 
-        username: u.getUsername()
-        json: json
-        entwurf: u.get("entwurf")
+        username: lib.ejsEsc u.getUsername()
+        json: lib.ejsEsc json
+        entwurf: lib.ejsEsc u.get("entwurf")
         bookmarks: u.get("bookmarks")
-        msg: if msg then msg else ""
-        pref: lib.appPrefix
-        ajax: lib.ajax
+        msg: lib.ejsEsc if msg then msg else ""
+        pref: lib.ejsEsc lib.appPrefix
       res.render "mix/logged-in.ejs", args
       if lib.clientSide
         $ ".bookmarks"
