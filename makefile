@@ -10,10 +10,10 @@ RM=trash-put
 dev: coffee TAGS # upload dev
 	pwd
 	parse deploy
-	$(BROWSE) https://dev-engelbaerchen.parseapp.com/debug.html
+	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/debug.html
 	#$(BROWSE) "https://dev-engelbaerchen.parseapp.com/add_bearmark?url=u:Test&title=Test"
 	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/spiel.html
-	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/
+	$(BROWSE) https://dev-engelbaerchen.parseapp.com/
 	
 	
 coffee:

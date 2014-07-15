@@ -70,7 +70,7 @@ mix.index = (req, res, msg) ->
     ), (error) ->
       console.error error
       res.render "mix/meldung.ejs",
-        message: "Hier drin ging was kaputt."
+        message: "Hier drin ging was kaputt." + (lib.clientSide and "\nBrowserinfo: " + navigator.userAgent or '')
       return
 
   else
