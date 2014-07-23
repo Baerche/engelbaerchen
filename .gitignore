@@ -34,3 +34,4 @@ scratch-*
 /public/views/mix
 
 *.geany
+/public/commit.txt
