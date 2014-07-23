@@ -1,7 +1,11 @@
+
+GO=coffee
 #go: coffee
 #go: reinstall dev
-go:  dev
+#go:  dev
 #go: dev
+
+go: $(GO)
 
 BROWSE=tools/gen/browse.sh
 RM=trash-put
@@ -34,6 +38,7 @@ coffee:
 	cp -a mix/* cloud/
 	cp -a mix/* public/
 	sed -i '/<!DOCTYPE html>/,/<body/d; /<\/body>/,/<\html>/ d' public/views/mix/*.ejs
+	coffee tools/merge_ejs.coffee public/views/mix/*.ejs
 
 fixtabs:
 	tools/expand.py -i -t 4 public/*.coffee
