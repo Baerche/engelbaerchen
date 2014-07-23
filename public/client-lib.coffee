@@ -49,7 +49,8 @@ if lib.ajax
         """
         
     document.write """
-         <script src="x/ejs_production.js"></script>
+         <script src="x/ejs.min.js"></script>
+         <script src="gen/templates.js"></script>
          <script src="gen/keys.js"></script>
         <script src="lib-js.js"></script>
         <script>
@@ -112,11 +113,16 @@ lib.definePost = (path, fun, ajax) ->
 
 lib.appPrefix = "Mix-"
 
+lib.ejsEsc = (s) ->
+    s
+    #_.escape s #alt
+
 lib.AjaxRes = () ->
     @render = (tmpl, data) ->
         $ 'body'
         .html "<h1>Moment</h1>"
-        html = new EJS({url: 'views/' + tmpl}).render(data);
+        html = ejs.render templates[tmpl], data
+        #html = new EJS({url: 'views/' + tmpl}).render(data); #alt
         $ 'body'
         .html html
         window.main(true)
@@ -136,6 +142,4 @@ lib.submitAjax = lib.trap (fun,submitButtonRaw) ->
     fun(o, new lib.AjaxRes())
     return false
 
-lib.ejsEsc = (s) ->
-    _.escape s
 

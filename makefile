@@ -1,9 +1,7 @@
 
 GO=coffee
-#go: coffee
+GO=dev
 #go: reinstall dev
-#go:  dev
-#go: dev
 
 go: $(GO)
 

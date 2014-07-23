@@ -34,4 +34,6 @@ scratch-*
 /public/views/mix
 
 *.geany
+
 /public/commit.txt
+/node_modules

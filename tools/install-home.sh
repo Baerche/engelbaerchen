@@ -7,7 +7,8 @@ cd $(dirname $0)/..
 downloads() {
 
 #npm install -g coffee-script 
-#npm install -g js2coffee 
+#npm install js2coffee 
+#npm install ejs
 
 mkdir -p ../bin
 cd ../bin
@@ -24,7 +25,7 @@ downloads_big() {
 
 browser() {
 #prep test
-echo BROWER
+echo BROWSER
 mkdir -p tools/gen
 cat >tools/gen/browse.sh <<SCR
 #!/bin/sh
@@ -41,5 +42,6 @@ chmod +x tools/gen/browse.sh
 
 #downloads
 #downloads_big
+cp -au ~/node_modules/ejs/ejs.min.js public/x
 make reinstall
 browser
