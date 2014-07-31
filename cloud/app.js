@@ -29,7 +29,7 @@ app.use(parseExpressCookieSession({
 //app.get('/', lib.index);
 //app.post('/', mix.postEntwurf);
 
-lib.app = app;
+lib.register(app);
 mix.register();
 
 app.get('/add_bearmark', function (req, res) {

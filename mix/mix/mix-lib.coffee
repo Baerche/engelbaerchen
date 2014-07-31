@@ -25,8 +25,10 @@ mix.debug = (req, res, msg) ->
     lo = debug: debug
     render = () -> 
         res.render "mix/debug.ejs", 
-            msg: lib.ejsEsc JSON.stringify lo, null, 4
-            grrr: lib.ejsEsc "<b>bold</b>"
+            msg: JSON.stringify lo, null, 4
+            grrr: "<b>bold</b>"
+            open: '{{'
+            close: '}}'
     if true
         Parse.Cloud.run "debug", {a: 1}
         .then (result) ->

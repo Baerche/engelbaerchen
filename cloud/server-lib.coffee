@@ -8,10 +8,10 @@ lib = exports
 appKey = "XvfIKW98ROlBjl9RHwZYqRwnOsUbI87MTlbUNY6L" #Dev
 
 lib.listUsers = (users) ->
-	[ users.length,
-		( [u.get('username'), u.get('entwurf')] for u in users )
-	]
-	
+    [ users.length,
+        ( [u.get('username'), u.get('entwurf')] for u in users )
+    ]
+    
 lib.addBearmark = (user, query) ->
     b = user.get 'bookmarks'
     u = _.escape query.url
@@ -20,18 +20,18 @@ lib.addBearmark = (user, query) ->
     user.set 'bookmarks', b
    
 appFromKey = (key,apps) ->
-	for i of apps
-		if apps[i].applicationId == key
-			return [i, apps[i]]
-	return null
+    for i of apps
+        if apps[i].applicationId == key
+            return [i, apps[i]]
+    return null
 
 lib.appName = () ->
-	a = appFromKey appKey, config.applications
-	a[0]
+    a = appFromKey appKey, config.applications
+    a[0]
 
 lib.appKeys = () ->
-	a = appFromKey appKey, config.applications
-	a[1]
+    a = appFromKey appKey, config.applications
+    a[1]
 
 #
 # für mix
@@ -43,26 +43,54 @@ lib.clientSide = false
 lib.appPrefix = "#{if lib.appName()=='Dev' then 'Dev-' else ''}"
 
 lib.defineGet = (path, fun, ajax) ->
-	lib.app.get path, (req, res) ->
-		lib.ajax = debug.NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
-		if lib.ajax
-			res.render "ajax", 
-				path: path
-				ajax: ajax
-		else
-			lib.res = res
-			fun req.query, res
+    lib.app.get path, (req, res) ->
+        lib.ajax = debug.NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
+        if lib.ajax
+            res.render "ajax", 
+                path: path
+                ajax: ajax
+        else
+            lib.res = res
+            fun req.query, res
 
 lib.definePost = (path, fun, ajax) ->
-	lib.app.post path, (req, res) ->
-		lib.ajax = debug.NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
-		if lib.ajax
-			res.render "ajax", 
-				path: path
-				ajax: ajax
-		else
-			lib.res = res
-			fun req.body, res
+    lib.app.post path, (req, res) ->
+        lib.ajax = debug.NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
+        if lib.ajax
+            res.render "ajax", 
+                path: path
+                ajax: ajax
+        else
+            lib.res = res
+            fun req.body, res
 
 lib.ejsEsc = (s) ->
     s
+
+#
+#handler in coffeescript
+lib.register = (app) ->
+    lib.app = app
+    app.get "/add_bearmark", (req, res) ->
+      u = Parse.User.current()
+      if Parse.User.current()
+        u.fetch().then((u) ->
+          lib.addBearmark u, req.query
+          u.save()
+        ).then (->
+          res.redirect "/"
+          return
+        ), (error) ->
+          console.error error
+          res.render "meldung.ejs",
+            message: "Hier drin ging was kaputt."
+
+          return
+
+      else
+        res.render "add-bearmark-login.ejs",
+          title: req.query.title
+          url: req.query.url
+
+      return
+      
