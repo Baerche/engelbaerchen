@@ -37,7 +37,6 @@ lib.appKeys = () ->
 # für mix
 #
 
-# um omi zu simulieren auf false, normal auf true
 lib.clientSide = false
 
 lib.appPrefix = "#{if lib.appName()=='Dev' then 'Dev-' else ''}"
@@ -68,29 +67,46 @@ lib.ejsEsc = (s) ->
     s
 
 #
-#handler in coffeescript
+#app-handler in coffeescript
+#
+
 lib.register = (app) ->
     lib.app = app
     app.get "/add_bearmark", (req, res) ->
-      u = Parse.User.current()
-      if Parse.User.current()
-        u.fetch().then((u) ->
-          lib.addBearmark u, req.query
-          u.save()
-        ).then (->
-          res.redirect "/"
-          return
-        ), (error) ->
-          console.error error
-          res.render "meldung.ejs",
-            message: "Hier drin ging was kaputt."
+        o = 
+            title: req.query.title
+            url: req.query.url
+            referer: req.headers.referer
+            open: '{{'
+            close: '}}'
+        render = () ->
+            o.log = lib.logged.join ''
+            res.render "bestaetige-bearmark.ejs", o
+            return
+        u = Parse.User.current()
+        if u
+            u.fetch()
+            .then (u) ->
+                log "Hallo #{u.get 'username'}, du bist auf server eingeloggt"
+                render()
+            , (e) -> 
+                log e
+                render()
+        else
+            log 'Nicht auf server eingeloggt'
+            render()
 
-          return
+#
+#logging
+#
 
-      else
-        res.render "add-bearmark-login.ejs",
-          title: req.query.title
-          url: req.query.url
+lib.logged = []
 
-      return
-      
+lib.log = (o) ->
+    console.log o
+    lib.logged.push "svr: #{o}\n"
+        
+lib.ulog = lib.log
+
+log = lib.log
+ulog = lib.ulog

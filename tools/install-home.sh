@@ -34,8 +34,8 @@ IFS='
 '
 cd $(dirname $0)/..
 
-chromium-browser \$1 &
-#firefox  \$1 &
+#chromium-browser \$1 &
+firefox  \$1 &
 SCR
 chmod +x tools/gen/browse.sh
 }

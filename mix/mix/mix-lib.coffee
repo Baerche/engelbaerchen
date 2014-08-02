@@ -14,7 +14,7 @@ mix.register = (run) ->
         
     lib.defineGet '/debug.html', mix.debug, 
         mainScript: "gen/nop.js"
-    lib.definePost '/', mix.postDebug, 
+    lib.definePost '/debug', mix.postDebug, 
         mainScript: "gen/nop.js"
         
     if run
@@ -26,28 +26,11 @@ mix.debug = (req, res, msg) ->
     render = () -> 
         res.render "mix/debug.ejs", 
             msg: JSON.stringify lo, null, 4
-            grrr: "<b>bold</b>"
             open: '{{'
             close: '}}'
-    if true
-        Parse.Cloud.run "debug", {a: 1}
-        .then (result) ->
-            lo.sollteOk = result
-        , (error) ->
-            lo.gingWirklichSchief = error
-            render()
-        .then ->
-            Parse.Cloud.run "debugFail", {a: 1}
-            .then (result) ->
-                lo.sollteNichtOk = result
-            , (error) ->
-                lo.gingGewolltSchief = error
-                render()
-        .then ->
-            lo.huch = true
-            render()
+    render()
         
-mix.postDebug = (req, res, msg) ->
+mix.postDebug = (req, res) ->
     mix.debug req, res, "dummy-done"
     
 mix.index = (req, res, msg) ->
@@ -109,6 +92,5 @@ mix.postEntwurf = (req, res) ->
   else
     lib.render "mix/meldung.ejs",
       message: "He dich gibts garnicht?! Entwurf nicht gespeichert."
-
   return
 

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+    <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+    <TITLE>Add bearmark - Engelbärchen</TITLE>
+    <META NAME="GENERATOR" CONTENT="LibreOffice 3.5  (Linux)">
+    <META NAME="CREATED" CONTENT="0;0">
+    <META NAME="CHANGEDBY" CONTENT="0baerchen ">
+    <META NAME="CHANGED" CONTENT="20140801;10034700">
+    <META NAME="CHANGEDBY" CONTENT="0baerchen ">
+    <SCRIPT SRC="mix/gen/debug-config.js"></SCRIPT>
+    <SCRIPT SRC="gen/client-lib.js"></SCRIPT>
+    <script src="gen/bestaetige-bearmark.js"></script>
+    <STYLE TYPE="text/css">
+    <!--
+        H2.cjk { font-family: "WenQuanYi Zen Hei" }
+        H2.ctl { font-family: "Lohit Hindi" }
+    -->
+    </STYLE>
+</HEAD>
+<BODY LANG="de-DE" DIR="LTR">
+<H1>Add bearmark</H1>
+<H2 CLASS="western"><A NAME="name"></A>Bearmark</H2>
+<P>Titel {{= title }} <BR>Url {{= url }} 
+</P>
+<P>Referer {{= referer }}</P>
+<HR>
+<P><A HREF="logout">Tschaui</A> <A HREF="/">Start</A></P>
+<P><BR><BR>
+</P>
+<FORM ACTION="/bearmark_eintragen" METHOD="POST">
+    <P>Name <INPUT TYPE=TEXT NAME="username" SIZE=20 STYLE="width: 4.34cm; height: 0.72cm">Pass<INPUT TYPE=PASSWORD NAME="password" SIZE=20 STYLE="width: 4.34cm; height: 0.72cm; font-family: 'Droid Sans Mono', monospace; font-size: 10pt"><INPUT TYPE=HIDDEN NAME="title" VALUE="{{= title }}"><INPUT TYPE=HIDDEN NAME="url" VALUE="{{= url }}"></P>
+    <P><BR><INPUT TYPE=SUBMIT NAME="bekannt" VALUE="Los!" STYLE="width: 1.51cm; height: 0.98cm" ONCLICK="return login()">    
+        </P>
+</FORM>
+<HR>
+<H2 CLASS="western">Fachchinesisch vom Teufelchen:</H2>
+<pre id="log">{{= log }}</pre>
+</BODY>
+</HTML>

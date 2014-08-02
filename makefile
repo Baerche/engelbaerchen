@@ -1,13 +1,16 @@
 
 GO=coffee
 GO=dev
+
+PAGE=https://dev-engelbaerchen.parseapp.com/tools.html
 PAGE=https://dev-engelbaerchen.parseapp.com/debug.html
 PAGE=https://dev-engelbaerchen.parseapp.com/add_bearmark?url=https%3A%2F%2Fdev-engelbaerchen.parseapp.com%2Fdebug.html&title=dev-debug
-#go: reinstall dev
 
 go: $(GO)
 
 BROWSE=tools/gen/browse.sh
+BROWSE=chromium-browser
+
 RM=trash-put
 #RM="rm -rf"
 
@@ -17,7 +20,7 @@ dev: coffee TAGS # upload dev
 	#$(BROWSE) "https://dev-engelbaerchen.parseapp.com/add_bearmark?url=u:Test&title=Test"
 	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/spiel.html
 	#$(BROWSE) https://dev-engelbaerchen.parseapp.com/
-	$(BROWSE) "$(PAGE)"
+	$(BROWSE) "$(PAGE)" &
 	
 coffee:
 
