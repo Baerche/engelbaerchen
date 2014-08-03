@@ -2,6 +2,7 @@ log = lib.log
 ulog = lib.ulog
 
 window.main = ->
+    log lib.ajax
     if not lib.ajax then return true
     $ ->
         u = Parse.User.current()

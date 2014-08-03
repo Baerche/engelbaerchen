@@ -107,32 +107,40 @@ mix.addBearmark = (user, query) ->
     user.set 'bookmarks', b
 
 mix.postBearmark = (req, res) ->
-    did = {}
-    render = () ->
+    u = Parse.User.current()
+    render = ->
         if not lib.clientSide
             res.render "mix/meldung.ejs",
                 message: lib.logged.join ''
-    post = () ->
-        
-    ulog "Posting"
-    log JSON.stringify req
-    u = Parse.User.current()
-    if u
+    post = ->
         u.fetch()
-        .then (u) ->
+        .then ->
             log "Immer noch eingeloggt als #{u.get 'username'}, in form #{req.user}"
-            did.login = true
             u
-        .then (u) ->
+        .then ->
             mix.addBearmark u, req
             u.save()
-        .then (u) ->
+        .then ->
             res.redirect '/'
         , (e) -> 
             log e
             render()
+    login = ->
+        log 'Nicht mehr eingeloggt, logging in'
+        Parse.User.logIn req.user, req.pass
+        .then (user) ->
+            log 'logged in, posting'
+            u = user
+            post()
+        , (e) ->
+            log e
+            render()
+        
+    ulog "Posting"
+    log JSON.stringify req
+    if u
+        post()
     else
-        log 'Nicht mehr eingeloggt'
-        render()
+        login()
     
     
