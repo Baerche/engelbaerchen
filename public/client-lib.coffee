@@ -1,9 +1,9 @@
 window.lib = {}
 if true
     window.onerror = (errorMsg, url, lineNumber, error) ->
-        if error then console.log error #dauernull, nur neue browser
-        alert JSON.stringify [
-            'Hi Progger. Console öffnen und nochmal testen.', errorMsg, url, lineNumber]
+        s = ['Hi Progger. Console öffnen und nochmal testen.', errorMsg, url, lineNumber, error]
+        console.log s
+        alert JSON.stringify s
         false
 
 lib.ajax = debug.NOT_SIM_OMI and 
@@ -23,6 +23,17 @@ lib.trap = (fun) ->
             #alert 'Schau für Teufelchen in console: ' + e
             throw e
 
+lib.trapHandler = (fun) ->
+    (args...) ->
+        try fun args...
+        catch e
+            #console.log e # nur desc
+            #console.trace() # only functions
+            console.log (e.stack) #desc und functions mit source-url (ohne sourcemap)
+            alert 'Schau für Teufelchen in console: ' + e
+            debugger
+            return false
+            
 window.require = lib.trap (s) ->
     t = 'cloud/gen/server-lib': 'lib'
         , 'underscore': '_'

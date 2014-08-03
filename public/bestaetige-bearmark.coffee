@@ -20,3 +20,7 @@ window.main = ->
             ulog 'Nicht für ajax eingeloggt'
 
 window.main()
+
+window.mySubmit = lib.trapHandler (el) ->
+    if lib.ajax then return lib.submitAjax(mix.postBearmark,el)
+

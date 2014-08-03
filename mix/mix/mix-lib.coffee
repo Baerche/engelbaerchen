@@ -3,6 +3,9 @@ _ = require 'underscore'
 debug = require ('cloud/mix/gen/debug-config')
 mix = exports
 
+log = lib.log
+ulog = lib.ulog
+
 mix.register = (run) ->
 
     lib.defineGet '/', mix.index, 
@@ -17,6 +20,8 @@ mix.register = (run) ->
     lib.definePost '/debug', mix.postDebug, 
         mainScript: "gen/nop.js"
         
+    lib.definePost '/bearmark_eintragen', mix.postBearmark
+
     if run
         $ ->
             lib.trap(lib.gets[run])({}, new lib.AjaxRes())
@@ -94,3 +99,10 @@ mix.postEntwurf = (req, res) ->
       message: "He dich gibts garnicht?! Entwurf nicht gespeichert."
   return
 
+mix.postBearmark = (req, res) ->
+    ulog "dummypost"
+    log JSON.stringify req
+    if not lib.clientSide
+        res.render "mix/meldung.ejs",
+            message: lib.logged.join ''
+    
