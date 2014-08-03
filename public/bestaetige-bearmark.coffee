@@ -25,3 +25,8 @@ window.main()
 window.mySubmit = lib.trapHandler (el) ->
     if lib.ajax then return lib.submitAjax(mix.postBearmark,el)
 
+window.dump = ->
+    w = (o) -> document.write "#{JSON.stringify o}\n"
+    w lib.ajax
+    w navigator.userAgent
+    w window.opera

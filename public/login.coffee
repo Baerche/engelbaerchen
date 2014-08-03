@@ -2,7 +2,6 @@ log = lib.log
 ulog = lib.ulog
 
 window.main = ->
-    log debug.NOT_SIM_OMI
     if not lib.ajax then log "kein ajax"; return true
     u = Parse.User.current()
     if u

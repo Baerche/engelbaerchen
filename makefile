@@ -114,7 +114,6 @@ wget: wget_dir wget_ejs
 	wget -c https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js;\
 	wget -c https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js;\
 	wget -c https://www.parsecdn.com/js/parse-1.2.18.min.js; \
-	wget -c https://embeddedjavascript.googlecode.com/files/ejs_production.js;
 
 wget_dir:
 	mkdir -p local-libs

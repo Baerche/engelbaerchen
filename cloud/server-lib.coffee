@@ -36,7 +36,7 @@ lib.appPrefix = "#{if lib.appName()=='Dev' then 'Dev-' else ''}"
 
 lib.defineGet = (path, fun, ajax) ->
     lib.app.get path, (req, res) ->
-        lib.ajax = debug.NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
+        lib.ajax = debug.notOmi req.headers["user-agent"]
         if lib.ajax
             res.render "ajax", 
                 path: path
@@ -47,7 +47,7 @@ lib.defineGet = (path, fun, ajax) ->
 
 lib.definePost = (path, fun, ajax) ->
     lib.app.post path, (req, res) ->
-        lib.ajax = debug.NOT_SIM_OMI and ! req.headers["user-agent"].match /Opera Mini/
+        lib.ajax = debug.notOmi req.headers["user-agent"]
         if lib.ajax
             res.render "ajax", 
                 path: path

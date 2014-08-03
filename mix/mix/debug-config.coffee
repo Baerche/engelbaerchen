@@ -2,7 +2,10 @@ if this.exports
     debug = exports
 else
     window.debug = debug = {}
-    
-debug.NOT_SIM_OMI  = true 
 
-#debug.NOT_SIM_OMI  = false # debug
+debug.notOmi = (userAgent) ->    
+
+    #return true # debug
+
+    return ! userAgent.match /Opera Mini/
+

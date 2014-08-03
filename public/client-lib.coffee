@@ -6,7 +6,7 @@ if true
         alert JSON.stringify s
         false
 
-lib.ajax = debug.NOT_SIM_OMI and 
+lib.ajax = debug.notOmi(navigator.userAgent) and 
     if window.useAjax != undefined 
         window.useAjax
     else
