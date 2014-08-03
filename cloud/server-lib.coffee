@@ -12,13 +12,6 @@ lib.listUsers = (users) ->
         ( [u.get('username'), u.get('entwurf')] for u in users )
     ]
     
-lib.addBearmark = (user, query) ->
-    b = user.get 'bookmarks'
-    u = _.escape query.url
-    u = """<a href="#{u}">[#{_.escape query.title} | #{u}]</a><br>\n"""
-    b = u + b
-    user.set 'bookmarks', b
-   
 appFromKey = (key,apps) ->
     for i of apps
         if apps[i].applicationId == key

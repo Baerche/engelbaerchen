@@ -99,10 +99,40 @@ mix.postEntwurf = (req, res) ->
       message: "He dich gibts garnicht?! Entwurf nicht gespeichert."
   return
 
+mix.addBearmark = (user, query) ->
+    b = user.get 'bookmarks'
+    u = _.escape query.url
+    u = """<a href="#{u}">[#{_.escape query.title} | #{u}]</a><br>\n"""
+    b = u + b
+    user.set 'bookmarks', b
+
 mix.postBearmark = (req, res) ->
-    ulog "dummypost"
+    did = {}
+    render = () ->
+        if not lib.clientSide
+            res.render "mix/meldung.ejs",
+                message: lib.logged.join ''
+    post = () ->
+        
+    ulog "Posting"
     log JSON.stringify req
-    if not lib.clientSide
-        res.render "mix/meldung.ejs",
-            message: lib.logged.join ''
+    u = Parse.User.current()
+    if u
+        u.fetch()
+        .then (u) ->
+            log "Immer noch eingeloggt als #{u.get 'username'}, in form #{req.user}"
+            did.login = true
+            u
+        .then (u) ->
+            mix.addBearmark u, req
+            u.save()
+        .then (u) ->
+            res.redirect '/'
+        , (e) -> 
+            log e
+            render()
+    else
+        log 'Nicht mehr eingeloggt'
+        render()
+    
     
